@@ -7,13 +7,21 @@ const navSlide = () => {
         nav.classList.toggle('nav-active');
         // animate links
         navLinks.forEach((link, index)=>{
-            link.style.animation = `FadeNavLink 0.5s ease forwards ${index / 7 + 0.3}s`;
+            if(link.style.animation){
+                link.style.animation = '';
+            }else{
+                link.style.animation = `FadeNavLink 0.5s ease forwards ${index / 7 + 0.2}s`;
+            }
         });
+        // burger animation
+        burger.classList.toggle('b-toggle');
     });
 }
 
 const app = ()=>{
     navSlide();
 }
+
+
 
 app()
