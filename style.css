@@ -106,3 +106,16 @@ nav{
 .b-toggle .line3{
     transform: rotate(45deg) translate(-5px, -6px);
 }
+
+.bg{
+    position: absolute;
+    height: 92vh;
+    width: 100vw;
+    top: 8;
+    left: 0;
+    background: url(Images/library_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
