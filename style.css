@@ -109,7 +109,7 @@ nav{
 
 .bg{
     position: absolute;
-    height: 92vh;
+    height: 82vh;
     width: 100vw;
     top: 8;
     left: 0;
@@ -119,3 +119,59 @@ nav{
     background-position: center;
     z-index: -2;
 }
+
+.search-box{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    height: 60px;
+    padding: 10px;
+    background: burlywood;
+    transform: translate(-50%, 50%);
+    border: 2px solid white;
+    border-radius: 40px;
+}
+
+.search-box:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.search-box:hover > .searchButton{
+    background: white;
+    color: burlywood;
+}
+
+.searchButton{
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.searchInput {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 20px;
+    transition: 0.3s;
+    line-height: 40px;
+    width: 0px;
+}
+
+@media screen and (max-width: 620px){
+    .search-box:hover > .searchInput{
+        width: 150px;
+        padding: 0, 6px;
+    }
+}
+
