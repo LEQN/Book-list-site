@@ -3,7 +3,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+body{
+    background-color: burlywood;
+}
 nav{
     display: flex;
     justify-content: space-around;
@@ -108,7 +110,7 @@ nav{
 }
 
 .bg{
-    position: absolute;
+    /* position: absolute; */
     height: 82vh;
     width: 100vw;
     top: 8;
@@ -117,7 +119,6 @@ nav{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    z-index: -2;
 }
 
 .search-box{
@@ -175,3 +176,62 @@ nav{
     }
 }
 
+.trending{
+    position: relative;
+    background-color: burlywood;
+    width: 100vw;
+}
+
+footer{
+    background: burlywood;
+    height: auto;
+    width: 100vw;
+    border-top: 3px solid white;
+    color: white;
+    line-height: 50px;
+    padding: 0 20px;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-logo h4{
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.footer-links ul{
+    margin-top: 0;
+    list-style: none;
+    padding: 0;
+    line-height: 1.6;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.footer-links li{
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.footer-links a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.footer-links a:hover{
+    text-decoration: underline;
+    color: darkred;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 12px;
+}
