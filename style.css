@@ -180,6 +180,14 @@ nav{
     position: relative;
     background-color: burlywood;
     width: 100vw;
+    border-top: 3px solid white;
+}
+
+.trending h2{
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    padding: 20px;
 }
 
 footer{

@@ -18,8 +18,25 @@ const navSlide = () => {
     });
 }
 
+function getTrending(){
+    document.getElementById('trending-output').innerHTML="";
+    // try{
+        fetch("http://openlibrary.org/trending/daily.json")
+        .then(response => response.json())
+        .then(data =>{
+            for(var i = 0; i< 10; i++){
+                document.getElementById("trending-output").innerHTML+="<h3>"+data.works[i].title+"</h3>"+data.works[i].author_name[0]+
+                "<br><img src='http://covers.openlibrary.org/b/olid/"+data.works[i].cover_edition_key+"-M.jpg'><br>";
+            }
+        });
+    // }catch(error){
+    //     console.error('error');
+    // }
+}
+
 const app = ()=>{
     navSlide();
+    getTrending();
 }
 
 
