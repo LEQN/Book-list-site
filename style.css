@@ -38,6 +38,12 @@ nav{
     letter-spacing: 1px;
     font-size: 16px;
     text-decoration: none;
+    transition: 0.5s;
+}
+
+.nav-links a:hover{
+    text-decoration: underline;
+    color: darkred;
 }
 
 .burger{
@@ -188,6 +194,7 @@ nav{
     color: white;
     text-decoration: underline;
     padding: 20px;
+    font-size: 34px;
 }
 
 #trending-output{
@@ -206,6 +213,7 @@ nav{
 .Trending-output-items img{
     max-width: 100%;
     max-height: 70%;
+    border: 3px solid white;
 }
 
 .Trending-output-items h3{
