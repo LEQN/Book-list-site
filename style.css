@@ -221,6 +221,23 @@ nav{
     padding-bottom: 5px;
 }
 
+@media screen and (max-width: 768px){
+    #trending-output{
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+    }
+}
+
+@media screen and (max-width: 400px){
+    #trending-output{
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
 footer{
     background: burlywood;
     height: auto;
