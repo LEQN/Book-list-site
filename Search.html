@@ -34,7 +34,17 @@
         <div class="mainBody">
             <!-- main body for searching -->
             <!-- search filters/bars -->
-
+            <div class="search">
+                <form id="searchForm">
+                    <select name="SearchCategory" id="SearchCategory">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="genre">Genre</option>
+                    </select>
+                    <input type="text" id="searchInput" placeholder="Enter your search">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
             <!-- display search results -->
         </div>
         <footer>

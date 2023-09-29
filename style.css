@@ -12,6 +12,7 @@ nav{
     align-items: center;
     min-height: 8vh;
     background-color: burlywood;
+    border-bottom: 3px solid white;
 }
 
 .logo{

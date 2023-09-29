@@ -19,39 +19,67 @@ const navSlide = () => {
 }
 
 function getTrending(){
-    // clear trending output div
-    document.getElementById('trending-output').innerHTML="";
-    // fetch the trending books for today from openlibrary
-    // try{
-        fetch("http://openlibrary.org/trending/daily.json")
-        .then(response => response.json())
-        .then(data =>{
-            // for(var i = 0; i< 10; i++){
-            //     document.getElementById("trending-output").innerHTML+="<div>'<h3>"+data.works[i].title+"</h3><br>"+data.works[i].author_name[0]+
-            //     "<br><img src='http://covers.openlibrary.org/b/olid/"+data.works[i].cover_edition_key+"-M.jpg'></div>";
-            // }
-            const trendingOutput = document.getElementById("trending-output");
-            for(var i = 0; i< 20; i++){
-                // create new div element for each book and add class the to it then append it to the parent trending-output div
-                const newDiv = document.createElement("div");
-                newDiv.classList.add("Trending-output-items");
-                newDiv.innerHTML = `
-                <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
-                <br><h3>${data.works[i].title}</h3>
-                <h4>${data.works[i].author_name[0]}</h4>
-                <p>First published in ${data.works[i].first_publish_year}</p>
-                 `;
-                 trendingOutput.appendChild(newDiv);
-            }
-        });
+    // check if the trending container exists
+    const trendingBooksContainer = document.getElementById('trending-output');
+    if(trendingBooksContainer){
+        // clear trending output div
+        document.getElementById('trending-output').innerHTML="";
+        // fetch the trending books for today from openlibrary
+        // try{
+            fetch("http://openlibrary.org/trending/daily.json")
+            .then(response => response.json())
+            .then(data =>{
+                // for(var i = 0; i< 10; i++){
+                //     document.getElementById("trending-output").innerHTML+="<div>'<h3>"+data.works[i].title+"</h3><br>"+data.works[i].author_name[0]+
+                //     "<br><img src='http://covers.openlibrary.org/b/olid/"+data.works[i].cover_edition_key+"-M.jpg'></div>";
+                // }
+                const trendingOutput = document.getElementById("trending-output");
+                for(var i = 0; i< 20; i++){
+                    // create new div element for each book and add class the to it then append it to the parent trending-output div
+                    const newDiv = document.createElement("div");
+                    newDiv.classList.add("Trending-output-items");
+                    newDiv.innerHTML = `
+                    <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
+                    <br><h3>${data.works[i].title}</h3>
+                    <h4>${data.works[i].author_name[0]}</h4>
+                    <p>First published in ${data.works[i].first_publish_year}</p>
+                    `;
+                    trendingOutput.appendChild(newDiv);
+                }
+            });
+    }else{}
     // }catch(error){
     //     console.error('error');
     // }
 }
 
+// search function
+function performSearch(){
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const searchCategory = document.getElementById('SearchCategory').value;
+        const searchQuery = document.getElementById('searchInput').value;
+
+        // perform search based on chosen category
+        switch(searchCategory) {
+            case 'title':
+                // title search
+                break;
+            case 'author':
+                // author search
+                break;
+            case 'genre':
+                // genre search
+                break;
+        }
+    });
+}
+
 const app = ()=>{
     navSlide();
     getTrending();
+    performSearch();
 }
 
 
