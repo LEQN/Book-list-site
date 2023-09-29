@@ -47,7 +47,7 @@ function getTrending(){
                     trendingOutput.appendChild(newDiv);
                 }
             });
-    }else{}
+    }
     // }catch(error){
     //     console.error('error');
     // }
@@ -55,25 +55,29 @@ function getTrending(){
 
 // search function
 function performSearch(){
-    document.getElementById('searchForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+    // check if search form exists
+    const searchingForm = document.getElementById('searchForm');
+    if(searchingForm){
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        const searchCategory = document.getElementById('SearchCategory').value;
-        const searchQuery = document.getElementById('searchInput').value;
+            const searchCategory = document.getElementById('SearchCategory').value;
+            const searchQuery = document.getElementById('searchInput').value;
 
-        // perform search based on chosen category
-        switch(searchCategory) {
-            case 'title':
-                // title search
-                break;
-            case 'author':
-                // author search
-                break;
-            case 'genre':
-                // genre search
-                break;
-        }
-    });
+            // perform search based on chosen category
+            switch(searchCategory) {
+                case 'title':
+                    // title search
+                    break;
+                case 'author':
+                    // author search
+                    break;
+                case 'genre':
+                    // genre search
+                    break;
+            }
+        });
+    }
 }
 
 const app = ()=>{
