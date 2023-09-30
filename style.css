@@ -292,3 +292,72 @@ footer{
     text-align: center;
     font-size: 12px;
 }
+
+/* styling for search bar on search page */
+.search{
+    display: flex;
+    justify-content: center;
+}
+
+#searchForm{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* background-color: white; */
+}
+
+#SearchCategory{
+    border: none;
+    outline: none;
+    border-bottom: .5em solid wheat;
+    background: #87addebe;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    width: 90px;
+}
+
+#searchInput{
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .5em solid #87adde;
+    background: #87addebe;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    width: 300px;
+}
+
+#searchForm button{
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .5em solid wheat;
+    background: #87addebe;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    width: 90px;
+}
+
+#searchForm button:active{
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .5em solid #87addebe;
+    background: wheat;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    width: 90px;
+}
