@@ -53,7 +53,51 @@ function getTrending(){
     // }
 }
 
-// search function
+// search by titles
+function titleSearch(query){
+    // fetch search results
+    // check if the trending container exists
+    const searchContainer = document.getElementById('results-output');
+    if(searchContainer){
+        // clear current results displayed
+        document.getElementById('results-output').innerHTML="";
+        
+        fetch("https://openlibrary.org/search.json?title="+query)
+        .then(response => response.json())
+        .then(data =>{
+            document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found. Displaying top 50";
+
+            // loop through and each book result & create new div for them
+            const resultsOutput = document.getElementById("results-output");
+            for(var i = 0; i< 50; i++){
+                const newDiv = document.createElement("div");
+                newDiv.classList.add("Result-output-items");
+                if(data.docs[i].author_name){
+                newDiv.innerHTML = `
+                <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                <br><h3>${data.docs[i].title}</h3>
+                <h4>${data.docs[i].author_name[0]}</h4>
+                <p>First published in ${data.docs[i].first_publish_year}</p>
+                <p>${data.docs[i].number_of_pages_median} of pages</p>
+                <p>Average rating: ${data.docs[i].ratings_average}</p>
+                `;
+                resultsOutput.appendChild(newDiv);
+                }else{
+                newDiv.innerHTML = `
+                <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                <br><h3>${data.docs[i].title}</h3>
+                <p>First published in ${data.docs[i].first_publish_year}</p>
+                <p>${data.docs[i].number_of_pages_median} of pages</p>
+                <p>Average rating: ${data.docs[i].ratings_average}</p>
+                `;
+                resultsOutput.appendChild(newDiv);
+                }
+            }
+        });
+    }
+}
+
+// search bar function
 function performSearch(){
     // check if search form exists
     const searchingForm = document.getElementById('searchForm');
@@ -67,7 +111,7 @@ function performSearch(){
             // perform search based on chosen category
             switch(searchCategory) {
                 case 'title':
-                    // title search
+                    titleSearch(searchQuery);
                     break;
                 case 'author':
                     // author search
