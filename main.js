@@ -107,7 +107,7 @@ function performSearch(){
 
             const searchCategory = document.getElementById('SearchCategory').value;
             const searchQuery = document.getElementById('searchInput').value;
-
+            if(searchQuery.trim().length > 0){
             // perform search based on chosen category
             switch(searchCategory) {
                 case 'title':
@@ -120,6 +120,7 @@ function performSearch(){
                     // genre search
                     break;
             }
+        }
         });
     }
 }
