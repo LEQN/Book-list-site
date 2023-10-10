@@ -56,7 +56,7 @@ function getTrending(){
 // search by titles
 function titleSearch(query){
     // fetch search results
-    // check if the trending container exists
+    // check if the search container exists
     const searchContainer = document.getElementById('results-output');
     if(searchContainer){
         // clear current results displayed
@@ -130,6 +130,57 @@ function titleSearch(query){
     }
 }
 
+// search by author
+function authorSearch(query){
+    // fetch search results
+    // check if the search container exists
+    const searchContainer = document.getElementById('results-output');
+    if(searchContainer){
+        // clear current results displayed
+        document.getElementById('results-output').innerHTML="";
+        
+        fetch("https://openlibrary.org/search/authors.json?q="+query)
+        .then(response => response.json())
+        .then(data =>{
+            // get number of results found
+            const resultCount = data.numFound;
+            if(resultCount > 20){
+                document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found. Displaying top 20:";
+                // loop through and each author result & create new div for them
+                const resultsOutput = document.getElementById("results-output");
+                for(var i = 0; i< 20; i++){
+                    const newDiv = document.createElement("div");
+                    newDiv.classList.add("Result-author-items");
+                    newDiv.innerHTML = `
+                    <img src='http://covers.openlibrary.org/a/olid/${data.docs[i].key}-M.jpg'>
+                    <br><a href=#><h3>${data.docs[i].name}</h3></a>
+                    <br><h4>Top work: ${data.docs[i].top_work}</h4>
+                    <p>Total work count: ${data.docs[i].work_count}</p>
+                    `;
+                    resultsOutput.appendChild(newDiv);
+                }
+            }else if(resultCount > 0){
+                document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found.";
+                // loop through and each author result & create new div for them
+                const resultsOutput = document.getElementById("results-output");
+                for(var i = 0; i< data.docs.length; i++){
+                    const newDiv = document.createElement("div");
+                    newDiv.classList.add("Result-author-items");
+                    newDiv.innerHTML = `
+                    <img src='http://covers.openlibrary.org/a/olid/${data.docs[i].key}-M.jpg'>
+                    <br><a href=#><h3>${data.docs[i].name}</h3></a>
+                    <br><h4>Top work: ${data.docs[i].top_work}</h4>
+                    <p>Total work count: ${data.docs[i].work_count}</p>
+                    `;
+                    resultsOutput.appendChild(newDiv);
+                }
+            }else{
+                document.getElementById("result-count").innerHTML="No results found.";
+            }
+        });
+    }
+}
+
 // search bar function
 function performSearch(){
     // check if search form exists
@@ -147,7 +198,7 @@ function performSearch(){
                     titleSearch(searchQuery);
                     break;
                 case 'author':
-                    // author search
+                    authorSearch(searchQuery);
                     break;
                 case 'genre':
                     // genre search
