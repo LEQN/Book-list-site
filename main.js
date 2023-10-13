@@ -179,7 +179,7 @@ function authorSearch(query){
                     newDiv.classList.add("Result-author-items");
                     newDiv.innerHTML = `
                     <img src='http://covers.openlibrary.org/a/olid/${data.docs[i].key}-M.jpg'>
-                    <br><a href="javascript:getAuthorWorks(${data.docs[i].key})"><h3>${data.docs[i].name}</h3></a>
+                    <br><a href="javascript:getAuthorWorks('${data.docs[i].key}')"><h3>${data.docs[i].name}</h3></a>
                     <h4>Top work: ${data.docs[i].top_work}</h4>
                     <p>Total work count: ${data.docs[i].work_count}</p>
                     `;
