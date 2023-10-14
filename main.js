@@ -66,9 +66,9 @@ function titleSearch(query){
         .then(response => response.json())
         .then(data =>{
             // get number of results found
-            const resultCount = data.numFound;
+            const resultCount = data.docs.length;
             if(resultCount > 50){
-                document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found. Displaying top 50";
+                document.getElementById("result-count").innerHTML=data.docs.length.toLocaleString() + " results found. Displaying top 50";
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< 50; i++){
@@ -96,7 +96,7 @@ function titleSearch(query){
                     }
                 }
             }else if(resultCount > 0){
-                document.getElementById("result-count").innerHTML=+data.numFound.toLocaleString() + " results found.";
+                document.getElementById("result-count").innerHTML=+data.docs.length.toLocaleString() + " results found.";
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< data.docs.length; i++){
@@ -169,9 +169,9 @@ function authorSearch(query){
         .then(response => response.json())
         .then(data =>{
             // get number of results found
-            const resultCount = data.numFound;
+            const resultCount = data.docs.length;
             if(resultCount > 20){
-                document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found. Displaying top 20:";
+                document.getElementById("result-count").innerHTML=data.docs.length.toLocaleString() + " results found. Displaying top 20:";
                 // loop through and each author result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< 20; i++){
@@ -186,7 +186,7 @@ function authorSearch(query){
                     resultsOutput.appendChild(newDiv);
                 }
             }else if(resultCount > 0){
-                document.getElementById("result-count").innerHTML=data.numFound.toLocaleString() + " results found.";
+                document.getElementById("result-count").innerHTML=data.docs.length.toLocaleString() + " results found.";
                 // loop through and each author result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< data.docs.length; i++){
@@ -207,6 +207,61 @@ function authorSearch(query){
     }
 }
 
+// search by subject
+function subjectSearch(query){
+    // check if the search container exists
+    const searchContainer = document.getElementById('results-output');
+    if(searchContainer){
+        // clear current results displayed
+        document.getElementById('results-output').innerHTML="";
+        const formattedInput = query.replace(/ /g, "_");
+        fetch("https://openlibrary.org/subjects/" + formattedInput + ".json?limit=100")
+        .then(response => response.json())
+        .then(data => {
+            // get number of results found
+            const resultCount = data.works.length;
+            // check results have covers
+                if(resultCount > 50){
+                    document.getElementById("result-count").innerHTML=data.works.length.toLocaleString() + " results found. Displaying top 50";
+                    // loop through and each book result & create new div for them
+                    const resultsOutput = document.getElementById("results-output");
+                    for(var i = 0; i< 50; i++){
+                        if(data.works[i].cover_id != null){
+                        const newDiv = document.createElement("div");
+                        newDiv.classList.add("Result-author-items");
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id[0]}-M.jpg'>
+                        <br><h3>${data.works[i].title}</h3>
+                        <p>Author: ${data.works[i].authors[0]}</p>
+                        <p>First published in ${data.works[i].first_publish_year}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }
+                    }
+                }else if( resultCount > 0){
+                    document.getElementById("result-count").innerHTML=data.works.length.toLocaleString() + " results found.";
+                    // loop through and each book result & create new div for them
+                    const resultsOutput = document.getElementById("results-output");
+                    for(var i = 0; i< resultCount; i++){
+                        if(data.works[i].cover_id != null){
+                        const newDiv = document.createElement("div");
+                        newDiv.classList.add("Result-author-items");
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id[0]}-M.jpg'>
+                        <br><h3>${data.works[i].title}</h3>
+                        <p>Author: ${data.works[i].authors[0]}</p>
+                        <p>First published in ${data.works[i].first_publish_year}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }
+                    }
+                }else{
+                    document.getElementById("result-count").innerHTML="No results found.";
+                }
+        });
+    }
+
+}
 
 // search bar function
 function performSearch(){
@@ -228,7 +283,7 @@ function performSearch(){
                     authorSearch(searchQuery);
                     break;
                 case 'genre':
-                    // genre search
+                    subjectSearch(searchQuery);
                     break;
             }
         }
