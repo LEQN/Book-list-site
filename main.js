@@ -72,27 +72,29 @@ function titleSearch(query){
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< 50; i++){
-                    const newDiv = document.createElement("div");
-                    newDiv.classList.add("Result-output-items");
-                    if(data.docs[i].author_name){
-                    newDiv.innerHTML = `
-                    <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                    <br><h3>${data.docs[i].title}</h3>
-                    <h4>${data.docs[i].author_name[0]}</h4>
-                    <p>First published in ${data.docs[i].first_publish_year}</p>
-                    <p>${data.docs[i].number_of_pages_median} of pages</p>
-                    <p>Average rating: ${data.docs[i].ratings_average}</p>
-                    `;
-                    resultsOutput.appendChild(newDiv);
-                    }else{
-                    newDiv.innerHTML = `
-                    <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                    <br><h3>${data.docs[i].title}</h3>
-                    <p>First published in ${data.docs[i].first_publish_year}</p>
-                    <p>${data.docs[i].number_of_pages_median} of pages</p>
-                    <p>Average rating: ${data.docs[i].ratings_average}</p>
-                    `;
-                    resultsOutput.appendChild(newDiv);
+                    if(data.docs[i].edition_key){
+                        const newDiv = document.createElement("div");
+                        newDiv.classList.add("Result-output-items");
+                        if(data.docs[i].author_name){
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><h3>${data.docs[i].title}</h3>
+                        <h4>${data.docs[i].author_name[0]}</h4>
+                        <p>First published in ${data.docs[i].first_publish_year}</p>
+                        <p>${data.docs[i].number_of_pages_median} of pages</p>
+                        <p>Average rating: ${data.docs[i].ratings_average}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }else{
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><h3>${data.docs[i].title}</h3>
+                        <p>First published in ${data.docs[i].first_publish_year}</p>
+                        <p>${data.docs[i].number_of_pages_median} of pages</p>
+                        <p>Average rating: ${data.docs[i].ratings_average}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }
                     }
                 }
             }else if(resultCount > 0){
@@ -100,29 +102,31 @@ function titleSearch(query){
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< data.docs.length; i++){
+                    if(data.docs[i].edition_key){
                     const newDiv = document.createElement("div");
-                    newDiv.classList.add("Result-output-items");
-                    if(data.docs[i].author_name){
-                    newDiv.innerHTML = `
-                    <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                    <br><h3>${data.docs[i].title}</h3>
-                    <h4>${data.docs[i].author_name[0]}</h4>
-                    <p>First published in ${data.docs[i].first_publish_year}</p>
-                    <p>${data.docs[i].number_of_pages_median} of pages</p>
-                    <p>Average rating: ${data.docs[i].ratings_average}</p>
-                    `;
-                    resultsOutput.appendChild(newDiv);
-                    }else{
-                    newDiv.innerHTML = `
-                    <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                    <br><h3>${data.docs[i].title}</h3>
-                    <p>First published in ${data.docs[i].first_publish_year}</p>
-                    <p>${data.docs[i].number_of_pages_median} of pages</p>
-                    <p>Average rating: ${data.docs[i].ratings_average}</p>
-                    `;
-                    resultsOutput.appendChild(newDiv);
+                        newDiv.classList.add("Result-output-items");
+                        if(data.docs[i].author_name){
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><h3>${data.docs[i].title}</h3>
+                        <h4>${data.docs[i].author_name[0]}</h4>
+                        <p>First published in ${data.docs[i].first_publish_year}</p>
+                        <p>${data.docs[i].number_of_pages_median} of pages</p>
+                        <p>Average rating: ${data.docs[i].ratings_average}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }else{
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><h3>${data.docs[i].title}</h3>
+                        <p>First published in ${data.docs[i].first_publish_year}</p>
+                        <p>${data.docs[i].number_of_pages_median} of pages</p>
+                        <p>Average rating: ${data.docs[i].ratings_average}</p>
+                        `;
+                        resultsOutput.appendChild(newDiv);
+                        }
                     }
-                }
+                }   
             }else{
                 document.getElementById("result-count").innerHTML="No results found.";
             }
@@ -230,7 +234,7 @@ function subjectSearch(query){
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id[0]}-M.jpg'>
+                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
                         <br><h3>${data.works[i].title}</h3>
                         <p>Author: ${data.works[i].authors[0]}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
@@ -247,7 +251,7 @@ function subjectSearch(query){
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id[0]}-M.jpg'>
+                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
                         <br><h3>${data.works[i].title}</h3>
                         <p>Author: ${data.works[i].authors[0]}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
