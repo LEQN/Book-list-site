@@ -273,6 +273,22 @@ nav{
     border: 3px solid white;
 }
 
+@media screen and (max-width: 768px){
+    #results-output{
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+    }
+
+    #result-count{
+        color: white;
+        text-decoration: underline;
+        padding: 20px;
+        font-size: 16px
+    }
+}
+
 footer{
     background: burlywood;
     height: auto;
@@ -394,4 +410,22 @@ footer{
     font-weight: bold;
     height: 50px;
     width: 90px;
+}
+
+@media screen and (max-width: 540px){
+    #searchForm{
+        padding: 5px;
+    }
+    
+    #SearchCategory{
+        width: 70px;
+    }
+    
+    #searchInput{
+        width: 180px;
+    }
+    
+    #searchForm button{
+        width: 70px;
+    }
 }
