@@ -239,6 +239,40 @@ nav{
     }
 }
 
+/* search results */
+.search-results{
+    position: relative;
+    background-color: burlywood;
+    width: 100vw;
+    border-top: 3px solid white;
+}
+
+#result-count{
+    color: white;
+    text-decoration: underline;
+    padding: 20px;
+    font-size: 18px
+}
+
+#results-output{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1em;
+}
+
+.Result-output-items{
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.Result-output-items img{
+    max-width: 100%;
+    max-height: 50%;
+    border: 3px solid white;
+}
+
 footer{
     background: burlywood;
     height: auto;

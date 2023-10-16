@@ -236,7 +236,7 @@ function subjectSearch(query){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
                         <br><h3>${data.works[i].title}</h3>
-                        <p>Author: ${data.works[i].authors[0]}</p>
+                        <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
                         `;
                         resultsOutput.appendChild(newDiv);
@@ -253,7 +253,7 @@ function subjectSearch(query){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
                         <br><h3>${data.works[i].title}</h3>
-                        <p>Author: ${data.works[i].authors[0]}</p>
+                        <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
                         `;
                         resultsOutput.appendChild(newDiv);
