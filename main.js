@@ -281,7 +281,7 @@ function performSearch(){
             e.preventDefault();
 
             const searchCategory = document.getElementById('SearchCategory').value;
-            const searchQuery = document.getElementById('searchInput').value;
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
             if(searchQuery.trim().length > 0){
             // perform search based on chosen category
             switch(searchCategory) {
@@ -300,10 +300,39 @@ function performSearch(){
     }
 }
 
+// home page search bar
+function homeSearch(){
+    // check if home search form exists
+    const homesearchingForm = document.getElementById('HomeSearch');
+    if(homesearchingForm){
+       document.getElementById('HomeSearch').addEventListener('submit', function (e) {
+           e.preventDefault();
+
+           const query = document.querySelector('.searchInput').value.toLowerCase();
+
+           window.location.href = `Search.html?query=${query}`;
+       });
+    }
+}
+
+// load the search on search page
+function loadHomeSearch(){
+    if (window.location.pathname === "/Search.html") {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('query');
+        if (searchQuery) {
+            titleSearch(searchQuery);
+            console.log(searchQuery);
+        }
+    }
+}
+
 const app = ()=>{
     navSlide();
     getTrending();
     performSearch();
+    homeSearch();
+    loadHomeSearch();
 }
 
 
