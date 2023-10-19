@@ -73,12 +73,13 @@ function titleSearch(query){
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< 50; i++){
                     if(data.docs[i].edition_key){
+                        const workslink = "https://openlibrary.org"+data.docs[i].key;
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-output-items");
                         if(data.docs[i].author_name){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><h3>${data.docs[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
@@ -88,7 +89,7 @@ function titleSearch(query){
                         }else{
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><h3>${data.docs[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
                         <p>Average rating: ${data.docs[i].ratings_average}</p>
@@ -103,12 +104,13 @@ function titleSearch(query){
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< data.docs.length; i++){
                     if(data.docs[i].edition_key){
-                    const newDiv = document.createElement("div");
+                        const workslink = "https://openlibrary.org"+data.docs[i].key;
+                        const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-output-items");
                         if(data.docs[i].author_name){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><h3>${data.docs[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
@@ -118,7 +120,7 @@ function titleSearch(query){
                         }else{
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><h3>${data.docs[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
                         <p>Average rating: ${data.docs[i].ratings_average}</p>
@@ -147,11 +149,12 @@ function getAuthorWorks(key){
             const resultsOutput = document.getElementById("results-output");
             for(var i = 0; i < data.entries.length; i++){
                 if(data.entries[i].covers){
+                    const workslink = "https://openlibrary.org"+data.entries[i].key;
                     const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.entries[i].covers[0]}-M.jpg'>
-                        <br><h3>${data.entries[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.entries[i].title}</h3></a>
                         `;
                         resultsOutput.appendChild(newDiv);
                     }   
@@ -231,11 +234,12 @@ function subjectSearch(query){
                     const resultsOutput = document.getElementById("results-output");
                     for(var i = 0; i< 50; i++){
                         if(data.works[i].cover_id != null){
+                            const workslink = "https://openlibrary.org"+data.works[i].key;
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
-                        <br><h3>${data.works[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
                         <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
                         `;
@@ -248,11 +252,12 @@ function subjectSearch(query){
                     const resultsOutput = document.getElementById("results-output");
                     for(var i = 0; i< resultCount; i++){
                         if(data.works[i].cover_id != null){
+                            const workslink = "https://openlibrary.org"+data.works[i].key;
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
-                        <br><h3>${data.works[i].title}</h3>
+                        <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
                         <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
                         `;

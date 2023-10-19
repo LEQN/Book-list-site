@@ -273,6 +273,20 @@ nav{
     border: 3px solid white;
 }
 
+.Result-author-items{
+    color: white;
+}
+
+.Result-author-items a{
+    text-decoration: underline;
+    color: white;
+}
+
+.Result-author-items a :hover{
+    color: darkred;
+    text-decoration: underline 3px;
+}
+
 @media screen and (max-width: 768px){
     #results-output{
         padding-top: 20px;
