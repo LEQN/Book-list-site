@@ -222,6 +222,27 @@ nav{
     padding-bottom: 5px;
 }
 
+.Trending-output-items button{
+    width: 150px;
+    height: 25px;
+    color: white;
+    background-color: #87adde;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.Trending-output-items button:hover{
+    background-color: #3e7dd6be;
+}
+
+.Trending-output-items button:active {
+    background-color: #87adde;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+
 @media screen and (max-width: 768px){
     #trending-output{
         padding-top: 20px;
@@ -273,8 +294,41 @@ nav{
     border: 3px solid white;
 }
 
+.Result-output-items a{
+    text-decoration: underline;
+    color: white;
+}
+
+.Result-output-items a:hover{
+    color: darkred;
+    text-decoration: underline 3px;
+}
+
+.Result-output-items button{
+    width: 150px;
+    height: 25px;
+    color: white;
+    background-color: #87adde;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.Result-output-items button:hover{
+    background-color: #3e7dd6be;
+}
+
+.Result-output-items button:active {
+    background-color: #87adde;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+
+
 .Result-author-items{
     color: white;
+    text-align: center;
 }
 
 .Result-author-items a{
@@ -285,6 +339,27 @@ nav{
 .Result-author-items a :hover{
     color: darkred;
     text-decoration: underline 3px;
+}
+
+.Result-author-items button{
+    width: 150px;
+    height: 25px;
+    color: white;
+    background-color: #87adde;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.Result-author-items button:hover{
+    background-color: #3e7dd6be;
+}
+
+.Result-author-items button:active {
+    background-color: #87adde;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
 }
 
 @media screen and (max-width: 768px){

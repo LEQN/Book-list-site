@@ -40,6 +40,8 @@ function getTrending(){
                     newDiv.classList.add("Trending-output-items");
                     newDiv.innerHTML = `
                     <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
+                    <br>
+                    <button>Add to list</button>
                     <br><h3>${data.works[i].title}</h3>
                     <h4>${data.works[i].author_name[0]}</h4>
                     <p>First published in ${data.works[i].first_publish_year}</p>
@@ -79,6 +81,7 @@ function titleSearch(query){
                         if(data.docs[i].author_name){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
@@ -89,6 +92,7 @@ function titleSearch(query){
                         }else{
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
@@ -110,6 +114,7 @@ function titleSearch(query){
                         if(data.docs[i].author_name){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
@@ -120,6 +125,7 @@ function titleSearch(query){
                         }else{
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
                         <p>${data.docs[i].number_of_pages_median} of pages</p>
@@ -154,6 +160,7 @@ function getAuthorWorks(key){
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.entries[i].covers[0]}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.entries[i].title}</h3></a>
                         `;
                         resultsOutput.appendChild(newDiv);
@@ -236,9 +243,10 @@ function subjectSearch(query){
                         if(data.works[i].cover_id != null){
                             const workslink = "https://openlibrary.org"+data.works[i].key;
                         const newDiv = document.createElement("div");
-                        newDiv.classList.add("Result-author-items");
+                        newDiv.classList.add("Result-output-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
                         <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
@@ -254,9 +262,10 @@ function subjectSearch(query){
                         if(data.works[i].cover_id != null){
                             const workslink = "https://openlibrary.org"+data.works[i].key;
                         const newDiv = document.createElement("div");
-                        newDiv.classList.add("Result-author-items");
+                        newDiv.classList.add("Result-output-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
+                        <br><button>Add to list</button>
                         <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
                         <p>Author: ${data.works[i].authors[0].name}</p>
                         <p>First published in ${data.works[i].first_publish_year}</p>
