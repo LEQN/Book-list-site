@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BookList</title>
+        <title>My List</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <!-- <link rel="shortcut icon" href="#"> -->
@@ -32,23 +32,20 @@
             </div>
         </nav>
         <div class="mainBody">
-            <!-- home page search area -->
-            <div class="bg">
-                <form id="HomeSearch">
-                    <div class="search-box">
-                        <input class="searchInput" type="text" placeholder="Search">
-                        <button class="searchButton">
-                            <i class="material-symbols-outlined">
-                                Search</i>
-                        </button>    
-                    </div>
-                </form>
-            </div>
-            <!-- display trending books -->
-            <div class="trending">
-               <h2>Trending Books Today:</h2>
-               <div id="trending-output"></div>
-            </div>
+        <!-- main body content -->
+                <!-- list select div (select which list to display on page) -->
+                <div class="list-menu">
+                    <ul class="menu-options">
+                        <!-- Completed -->
+                        <li><a href="#">Completed</a></li>
+                    
+                        <!-- currently reading -->
+                        <li><a href="#">Currently Reading</a></li>
+                    
+                        <!-- plan to read -->
+                        <li><a href="#">Plan to Read</a></li>
+                    </ul>
+                </div>
         </div>
         <footer>
             <div class="footer-content">
