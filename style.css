@@ -556,3 +556,24 @@ footer{
     text-decoration: underline 3px darkred;
     border-bottom: 6px solid darkred;
 }
+
+/* list table */
+.listTable{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #666;
+}
+
+.listTable table{
+    background-color: #87adde;
+    width: 65%;
+    border-collapse: collapse;
+    border: 3px solid white;
+}
+
+.listTable th{
+    height: 40px;
+    color: white;
+    border: 3px solid white;
+}

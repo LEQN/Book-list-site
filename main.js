@@ -336,6 +336,19 @@ function loadHomeSearch(){
     }
 }
 
+// add books button pop up for input details
+
+//add books to lists
+function AddBooksToLists(title, author, score, category){
+    const categoryKey = `${category}Books`;
+    const existingCategoryList = JSON.parse(localStorage.getItem(categoryKey)) || [];
+
+    existingCategoryList.push({ title, author, score});
+
+    localStorage.setItem(categoryKey, JSON.stringify(existingCategoryList));
+}
+
+
 const app = ()=>{
     navSlide();
     getTrending();
