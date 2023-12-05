@@ -370,11 +370,20 @@ function closeModal() {
     closeModalBtn.addEventListener('click', () => {
         modal.classList.add("hidden");
         overlay.classList.add("hidden");
+        const categorySelect = document.getElementById("lists");
+        const scoreSelect = document.getElementById("scores");
+        categorySelect.selectedIndex = 0;
+        scoreSelect.selectedIndex = 0;
+        
     });
 
     overlay.addEventListener('click', () => {
         modal.classList.add("hidden");
         overlay.classList.add("hidden");
+        const categorySelect = document.getElementById("lists");
+        const scoreSelect = document.getElementById("scores");
+        categorySelect.selectedIndex = 0;
+        scoreSelect.selectedIndex = 0;
     });
   };
 
