@@ -34,20 +34,22 @@ function getTrending(){
                 //     "<br><img src='http://covers.openlibrary.org/b/olid/"+data.works[i].cover_edition_key+"-M.jpg'></div>";
                 // }
                 const trendingOutput = document.getElementById("trending-output");
-                for(var i = 0; i< 20; i++){
-                    // create new div element for each book and add class the to it then append it to the parent trending-output div
-                    const newDiv = document.createElement("div");
-                    newDiv.classList.add("Trending-output-items");
-                    newDiv.innerHTML = `
-                    <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
-                    <br>
-                    <button>Add to list</button>
-                    <br><h3>${data.works[i].title}</h3>
-                    <h4>${data.works[i].author_name[0]}</h4>
-                    <p>First published in ${data.works[i].first_publish_year}</p>
-                    `;
-                    trendingOutput.appendChild(newDiv);
-                }
+                for(var i = 0; i<= 20; i++){
+                    if(data.works[i].author_name){
+                        // create new div element for each book and add class the to it then append it to the parent trending-output div
+                        const newDiv = document.createElement("div");
+                        newDiv.classList.add("Trending-output-items");
+                        newDiv.innerHTML = `
+                        <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
+                        <br>
+                        <button onclick="addBookInput('${data.works[i].title}', '${data.works[i].author_name[0]}')">Add to list</button>
+                        <br><h3>${data.works[i].title}</h3>
+                        <h4>${data.works[i].author_name[0]}</h4>
+                        <p>First published in ${data.works[i].first_publish_year}</p>
+                        `;
+                        trendingOutput.appendChild(newDiv);
+                    }
+             }
             });
     }
     // }catch(error){
@@ -337,6 +339,30 @@ function loadHomeSearch(){
 }
 
 // add books button pop up for input details
+function addBookInput(title, author){
+    const modal = document.querySelector(".modal");
+    const overlay = document.querySelector(".overlay");
+
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+}
+
+//close modal
+function closeModal() {
+    const closeModalBtn = document.querySelector(".close-btn");
+    const modal = document.querySelector(".modal");
+    const overlay = document.querySelector(".overlay");
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+    });
+
+    overlay.addEventListener('click', () => {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+    });
+  };
 
 //add books to lists
 function AddBooksToLists(title, author, score, category){
@@ -355,6 +381,7 @@ const app = ()=>{
     performSearch();
     homeSearch();
     loadHomeSearch();
+    closeModal();
 }
 
 
