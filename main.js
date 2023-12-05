@@ -42,7 +42,7 @@ function getTrending(){
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.works[i].cover_edition_key}-M.jpg'>
                         <br>
-                        <button onclick="addBookInput('${data.works[i].title}', '${data.works[i].author_name[0]}')">Add to list</button>
+                        <button data-title="${encodeURIComponent(data.works[i].title)}" data-author="${encodeURIComponent(data.works[i].author_name[0])}">Add to list</button>
                         <br><h3>${data.works[i].title}</h3>
                         <h4>${data.works[i].author_name[0]}</h4>
                         <p>First published in ${data.works[i].first_publish_year}</p>
@@ -341,6 +341,7 @@ function loadHomeSearch(){
 // open modal for input details and add books
 function addBookInput(title, author){
     openModal();
+    console.log(title, author);
 }
 
 // open modal for input
@@ -399,3 +400,14 @@ const app = ()=>{
 
 
 app()
+
+// handle add button click
+function handleButtonClick(event){
+    const target = event.target;
+
+    if(target.tagName === 'BUTTON' && target.dataset.title && target.dataset.author) {
+        const title = decodeURIComponent(target.dataset.title);
+        const author = decodeURIComponent(target.dataset.author);
+        addBookInput(title, author);
+    }
+}
