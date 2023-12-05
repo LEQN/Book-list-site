@@ -338,10 +338,23 @@ function loadHomeSearch(){
     }
 }
 
-// add books button pop up for input details
+// open modal for input details and add books
 function addBookInput(title, author){
+    openModal();
+}
+
+// open modal for input
+function openModal(){
     const modal = document.querySelector(".modal");
     const overlay = document.querySelector(".overlay");
+
+    // find center of screen and sest position
+    var centerX = window.innerWidth / 2;
+    var centerY = window.innerHeight / 2;
+
+    console.log(centerX, centerY);
+
+    modal.classList.add("modal-fixed");
 
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
