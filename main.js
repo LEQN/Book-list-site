@@ -341,20 +341,35 @@ function loadHomeSearch(){
 // open modal for input details and add books
 function addBookInput(title, author){
     openModal();
-    console.log(title, author);
+    // get submitted modal data
+    document.getElementById('modalInput').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const listCategory = document.getElementById('lists').value;
+        const score = document.getElementById('scores').value;
+        if(listCategory){
+            console.log(title, author, listCategory, score);
+            // add to list
+            AddBooksToLists(title, author, score, listCategory);
+            // close modal
+            const modal = document.querySelector(".modal");
+            const overlay = document.querySelector(".overlay");
+            modal.classList.add("hidden");
+            overlay.classList.add("hidden");
+            const categorySelect = document.getElementById("lists");
+            const scoreSelect = document.getElementById("scores");
+            categorySelect.selectedIndex = 0;
+            scoreSelect.selectedIndex = 0;
+        }
+    });
+    // call the func AddBooksToLists(title, author, score, category)
 }
 
 // open modal for input
 function openModal(){
     const modal = document.querySelector(".modal");
     const overlay = document.querySelector(".overlay");
-
-    // find center of screen and sest position
-    var centerX = window.innerWidth / 2;
-    var centerY = window.innerHeight / 2;
-
-    console.log(centerX, centerY);
-
+    //position modal in center
     modal.classList.add("modal-fixed");
 
     modal.classList.remove("hidden");
@@ -395,6 +410,8 @@ function AddBooksToLists(title, author, score, category){
     existingCategoryList.push({ title, author, score});
 
     localStorage.setItem(categoryKey, JSON.stringify(existingCategoryList));
+    // test storage
+    console.log(`Updated ${category} Books List:`, existingCategoryList);
 }
 
 
