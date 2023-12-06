@@ -341,8 +341,8 @@ function loadHomeSearch(){
 // open modal for input details and add books
 function addBookInput(title, author){
     openModal();
-    // get submitted modal data
-    document.getElementById('modalInput').addEventListener('submit', function (e) {
+    // function to handle form submission
+    function handleFormSubmission (e) {
         e.preventDefault();
 
         const listCategory = document.getElementById('lists').value;
@@ -360,9 +360,14 @@ function addBookInput(title, author){
             const scoreSelect = document.getElementById("scores");
             categorySelect.selectedIndex = 0;
             scoreSelect.selectedIndex = 0;
+
+            // remove the event listener handling submission
+            document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
         }
-    });
-    // call the func AddBooksToLists(title, author, score, category)
+    }
+
+    // attach eventlistener for form submission
+    document.getElementById('modalInput').addEventListener('submit', handleFormSubmission);
 }
 
 // open modal for input
