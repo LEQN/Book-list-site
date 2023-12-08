@@ -339,18 +339,21 @@ function loadHomeSearch(){
 }
 
 // open modal for input details and add books
+let handleFormSubmission; 
 function addBookInput(title, author){
     openModal();
     // function to handle form submission
-    function handleFormSubmission (e) {
+    handleFormSubmission = function(e) {
         e.preventDefault();
 
         const listCategory = document.getElementById('lists').value;
         const score = document.getElementById('scores').value;
         if(listCategory){
             console.log(title, author, listCategory, score);
-            // add to list
+            // add to list or change category 
+            
             AddBooksToLists(title, author, score, listCategory);
+            
             // close modal
             const modal = document.querySelector(".modal");
             const overlay = document.querySelector(".overlay");
@@ -387,24 +390,21 @@ function closeModal() {
     const modal = document.querySelector(".modal");
     const overlay = document.querySelector(".overlay");
 
-    closeModalBtn.addEventListener('click', () => {
+    function closeModalHandler(){
         modal.classList.add("hidden");
         overlay.classList.add("hidden");
         const categorySelect = document.getElementById("lists");
         const scoreSelect = document.getElementById("scores");
         categorySelect.selectedIndex = 0;
         scoreSelect.selectedIndex = 0;
-        
-    });
 
-    overlay.addEventListener('click', () => {
-        modal.classList.add("hidden");
-        overlay.classList.add("hidden");
-        const categorySelect = document.getElementById("lists");
-        const scoreSelect = document.getElementById("scores");
-        categorySelect.selectedIndex = 0;
-        scoreSelect.selectedIndex = 0;
-    });
+        // remove form event listener
+        document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
+    }
+
+    closeModalBtn.addEventListener('click', closeModalHandler);
+    overlay.addEventListener('click', closeModalHandler);
+
   };
 
 //add books to lists
@@ -442,3 +442,4 @@ function handleButtonClick(event){
         addBookInput(title, author);
     }
 }
+
