@@ -351,9 +351,11 @@ function addBookInput(title, author){
         if(listCategory){
             console.log(title, author, listCategory, score);
             // add to list or change category 
-            
-            AddBooksToLists(title, author, score, listCategory);
-            
+            if(checkList(title, author)){
+                changeCategory(title, author, score, listCategory);
+            }else{
+                AddBooksToLists(title, author, score, listCategory);
+            }
             // close modal
             const modal = document.querySelector(".modal");
             const overlay = document.querySelector(".overlay");
@@ -363,6 +365,9 @@ function addBookInput(title, author){
             const scoreSelect = document.getElementById("scores");
             categorySelect.selectedIndex = 0;
             scoreSelect.selectedIndex = 0;
+
+            // const allCategories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
+            // clearAllBooksLists(allCategories);
 
             // remove the event listener handling submission
             document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
@@ -443,3 +448,62 @@ function handleButtonClick(event){
     }
 }
 
+function clearAllBooksLists(categories) {
+    categories.forEach(category => {
+        const categoryKey = `${category}Books`;
+        localStorage.removeItem(categoryKey);
+        console.log(`${category} Books List cleared.`);
+    });
+}
+
+// check if book already in list
+function checkList(title, author){
+    const categories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
+    for (const category of categories) {
+        const categoryKey = `${category}Books`;
+        const categoryList = JSON.parse(localStorage.getItem(categoryKey)) || [];
+
+        const isInList = categoryList.some(book => book.title === title && book.author == author);
+
+        if (isInList) {
+            return true; // Book is in at least one list
+        }
+    }
+}
+
+// if book is in any list move to new list and delete from old
+function changeCategory(title, author, newScore, newCategory){
+    const categories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
+    for (const currentCategory of categories) {
+        const currentCategoryKey = `${currentCategory}Books`;
+        const newCategoryKey = `${newCategory}Books`;
+
+        // get lists
+        const currentCategoryList = JSON.parse(localStorage.getItem(currentCategoryKey)) || [];
+        const newCategoryList = JSON.parse(localStorage.getItem(newCategoryKey)) || [];
+
+        // Find the book in the current category list
+        const bookIndex = currentCategoryList.findIndex(book => book.title === title && book.author === author);
+
+        if (bookIndex !== -1) {
+            // Remove the book from the current category list
+            const removedBook = currentCategoryList.splice(bookIndex, 1)[0];
+
+            // check if the book alrady in the new category list
+            const existingBookIndex = newCategoryList.findIndex(book => book.title === title && book.author === author);
+            if(existingBookIndex !== -1){
+                newCategoryList[existingBookIndex].score = newScore;
+            }else{
+                // Add the book to the new category list
+                newCategoryList.push(removedBook);
+            }
+
+            // Update Local Storage for both categories
+            localStorage.setItem(currentCategoryKey, JSON.stringify(currentCategoryList));
+            localStorage.setItem(newCategoryKey, JSON.stringify(newCategoryList));
+
+            console.log(`Moved book "${title}" by ${author} to ${newCategory}.`, newCategoryList);
+            return; // Exit the function after moving the book
+        }
+    }
+}
