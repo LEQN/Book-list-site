@@ -34,7 +34,7 @@ function getTrending(){
                 //     "<br><img src='http://covers.openlibrary.org/b/olid/"+data.works[i].cover_edition_key+"-M.jpg'></div>";
                 // }
                 const trendingOutput = document.getElementById("trending-output");
-                for(var i = 0; i<= 20; i++){
+                for(var i = 0; i<= 19; i++){
                     if(data.works[i].author_name){
                         // create new div element for each book and add class the to it then append it to the parent trending-output div
                         const newDiv = document.createElement("div");
@@ -366,8 +366,7 @@ function addBookInput(title, author){
             categorySelect.selectedIndex = 0;
             scoreSelect.selectedIndex = 0;
 
-            // const allCategories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
-            // clearAllBooksLists(allCategories);
+            
 
             // remove the event listener handling submission
             document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
@@ -425,6 +424,51 @@ function AddBooksToLists(title, author, score, category){
 }
 
 
+// select list to display on table
+function listCategoryButtons(){
+    const listButtons = document.getElementsByClassName('menu-options');
+    if(listButtons.length > 0){
+        console.log("true");
+        document.getElementById('Completed').addEventListener('click', function(){
+            listDisplay("Completed");
+        });
+
+        document.getElementById('Current').addEventListener('click', function(){
+            listDisplay("CurrentlyReading");
+        });
+
+        document.getElementById('Planned').addEventListener('click', function(){
+            listDisplay("PlanToRead");
+        });
+    }
+}
+
+function listDisplay(category){
+    const categoryKey = `${category}Books`;
+    const list = JSON.parse(localStorage.getItem(categoryKey)) || [];
+
+    // get table body
+    const tableBody = document.getElementById('ListTableBody');
+    // clear current data
+    tableBody.innerHTML = '';
+    var index = 1;
+    // iterate through list displaying data
+    list.forEach(book => {
+        const row = tableBody.insertRow();
+        // create cells in rows
+        const bookIndexCell = row.insertCell(0);
+        const titleCell = row.insertCell(1);
+        const authorCell = row.insertCell(2);
+        const scoreCell = row.insertCell(3);
+
+        // set values
+        bookIndexCell.textContent = index;
+        titleCell.textContent = book.title;
+        authorCell.textContent = book.author;
+        scoreCell.textContent = book.score;
+    });
+}
+
 const app = ()=>{
     navSlide();
     getTrending();
@@ -432,6 +476,7 @@ const app = ()=>{
     homeSearch();
     loadHomeSearch();
     closeModal();
+    listCategoryButtons();
 }
 
 
