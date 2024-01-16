@@ -529,7 +529,7 @@ footer{
 .menu-options{
     background-color: #87adde;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 65%;
     border: 3px solid white;
 }
@@ -562,7 +562,7 @@ footer{
     display: flex;
     justify-content: center;
     padding: 20px;
-    background-color: #666;
+    /* background-color: #666; */
 }
 
 .listTable table{
@@ -578,6 +578,15 @@ footer{
     border: 3px solid white;
 }
 
+.listTable tbody td{
+    color: #3e7dd6be;
+    background-color: wheat;
+    font-size: large;
+    font-weight: bold;
+    border: 3px solid white;
+    padding: 3px;
+    padding-right: 0;
+}
 /* modal */
 .modal-container {
     display: flex;
