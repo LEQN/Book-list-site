@@ -35,7 +35,7 @@ function getTrending(){
                 // }
                 const trendingOutput = document.getElementById("trending-output");
                 for(var i = 0; i<= 19; i++){
-                    if(data.works[i].author_name){
+                    if(data.works[i].author_name && data.works[i].cover_edition_key){
                         // create new div element for each book and add class the to it then append it to the parent trending-output div
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Trending-output-items");
@@ -75,15 +75,17 @@ function titleSearch(query){
                 document.getElementById("result-count").innerHTML=data.docs.length.toLocaleString() + " results found. Displaying top 50";
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
-                for(var i = 0; i< 50; i++){
-                    if(data.docs[i].edition_key){
+                var count = 0;
+                for(var i = 0; count< 50; i++){
+                    if(data.docs[i].edition_key && data.docs[i].author_name){
                         const workslink = "https://openlibrary.org"+data.docs[i].key;
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-output-items");
-                        if(data.docs[i].author_name){
+                        
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><button>Add to list</button>
+                        <br>
+                        <button data-title="${encodeURIComponent(data.docs[i].title)}" data-author="${encodeURIComponent(data.docs[i].author_name[0])}">Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
@@ -91,17 +93,7 @@ function titleSearch(query){
                         <p>Average rating: ${data.docs[i].ratings_average}</p>
                         `;
                         resultsOutput.appendChild(newDiv);
-                        }else{
-                        newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><button>Add to list</button>
-                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
-                        <p>First published in ${data.docs[i].first_publish_year}</p>
-                        <p>${data.docs[i].number_of_pages_median} of pages</p>
-                        <p>Average rating: ${data.docs[i].ratings_average}</p>
-                        `;
-                        resultsOutput.appendChild(newDiv);
-                        }
+                        count++;
                     }
                 }
             }else if(resultCount > 0){
@@ -109,14 +101,15 @@ function titleSearch(query){
                 // loop through and each book result & create new div for them
                 const resultsOutput = document.getElementById("results-output");
                 for(var i = 0; i< data.docs.length; i++){
-                    if(data.docs[i].edition_key){
+                    if(data.docs[i].edition_key && data.docs[i].author_name){
                         const workslink = "https://openlibrary.org"+data.docs[i].key;
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("Result-output-items");
-                        if(data.docs[i].author_name){
+                        
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><button>Add to list</button>
+                        <br>
+                        <button data-title="${encodeURIComponent(data.docs[i].title)}" data-author="${encodeURIComponent(data.docs[i].author_name[0])}">Add to list</button>
                         <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
                         <h4>${data.docs[i].author_name[0]}</h4>
                         <p>First published in ${data.docs[i].first_publish_year}</p>
@@ -124,17 +117,6 @@ function titleSearch(query){
                         <p>Average rating: ${data.docs[i].ratings_average}</p>
                         `;
                         resultsOutput.appendChild(newDiv);
-                        }else{
-                        newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/olid/${data.docs[i].edition_key[0]}-M.jpg'>
-                        <br><button>Add to list</button>
-                        <br><a href="${workslink}"><h3>${data.docs[i].title}</h3></a>
-                        <p>First published in ${data.docs[i].first_publish_year}</p>
-                        <p>${data.docs[i].number_of_pages_median} of pages</p>
-                        <p>Average rating: ${data.docs[i].ratings_average}</p>
-                        `;
-                        resultsOutput.appendChild(newDiv);
-                        }
                     }
                 }   
             }else{
@@ -145,7 +127,7 @@ function titleSearch(query){
 }
 
 // fetch and display the data for the works written by author key
-function getAuthorWorks(key){
+function getAuthorWorks(key, author){
     const searchContainer = document.getElementById('results-output');
     if(searchContainer){
         // clear current results displayed
@@ -162,7 +144,8 @@ function getAuthorWorks(key){
                         newDiv.classList.add("Result-author-items");
                         newDiv.innerHTML = `
                         <img src='http://covers.openlibrary.org/b/id/${data.entries[i].covers[0]}-M.jpg'>
-                        <br><button>Add to list</button>
+                        <br>
+                        <button data-title="${encodeURIComponent(data.entries[i].title)}" data-author="${encodeURIComponent(author)}">Add to list</button>
                         <br><a href="${workslink}"><h3>${data.entries[i].title}</h3></a>
                         `;
                         resultsOutput.appendChild(newDiv);
@@ -195,7 +178,7 @@ function authorSearch(query){
                     newDiv.classList.add("Result-author-items");
                     newDiv.innerHTML = `
                     <img src='http://covers.openlibrary.org/a/olid/${data.docs[i].key}-M.jpg'>
-                    <br><a href="javascript:getAuthorWorks('${data.docs[i].key}')"><h3>${data.docs[i].name}</h3></a>
+                    <br><a href="javascript:getAuthorWorks('${data.docs[i].key}', '${data.docs[i].name}')"><h3>${data.docs[i].name}</h3></a>
                     <h4>Top work: ${data.docs[i].top_work}</h4>
                     <p>Total work count: ${data.docs[i].work_count}</p>
                     `;
@@ -210,7 +193,7 @@ function authorSearch(query){
                     newDiv.classList.add("Result-author-items");
                     newDiv.innerHTML = `
                     <img src='http://covers.openlibrary.org/a/olid/${data.docs[i].key}-M.jpg'>
-                    <br><a href="javascript:getAuthorWorks('${data.docs[i].key}')"><h3>${data.docs[i].name}</h3></a>
+                    <br><a href="javascript:getAuthorWorks('${data.docs[i].key}', '${data.docs[i].name}')"><h3>${data.docs[i].name}</h3></a>
                     <h4>Top work: ${data.docs[i].top_work}</h4>
                     <p>Total work count: ${data.docs[i].work_count}</p>
                     `;
@@ -244,16 +227,17 @@ function subjectSearch(query){
                     for(var i = 0; i< 50; i++){
                         if(data.works[i].cover_id != null){
                             const workslink = "https://openlibrary.org"+data.works[i].key;
-                        const newDiv = document.createElement("div");
-                        newDiv.classList.add("Result-output-items");
-                        newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
-                        <br><button>Add to list</button>
-                        <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
-                        <p>Author: ${data.works[i].authors[0].name}</p>
-                        <p>First published in ${data.works[i].first_publish_year}</p>
-                        `;
-                        resultsOutput.appendChild(newDiv);
+                            const newDiv = document.createElement("div");
+                            newDiv.classList.add("Result-output-items");
+                            newDiv.innerHTML = `
+                            <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
+                            <br>
+                            <button data-title="${encodeURIComponent(data.works[i].title)}" data-author="${encodeURIComponent(data.works[i].authors[0].name)}">Add to list</button>
+                            <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
+                            <p>Author: ${data.works[i].authors[0].name}</p>
+                            <p>First published in ${data.works[i].first_publish_year}</p>
+                            `;
+                            resultsOutput.appendChild(newDiv);
                         }
                     }
                 }else if( resultCount > 0){
@@ -263,16 +247,16 @@ function subjectSearch(query){
                     for(var i = 0; i< resultCount; i++){
                         if(data.works[i].cover_id != null){
                             const workslink = "https://openlibrary.org"+data.works[i].key;
-                        const newDiv = document.createElement("div");
-                        newDiv.classList.add("Result-output-items");
-                        newDiv.innerHTML = `
-                        <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
-                        <br><button>Add to list</button>
-                        <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
-                        <p>Author: ${data.works[i].authors[0].name}</p>
-                        <p>First published in ${data.works[i].first_publish_year}</p>
-                        `;
-                        resultsOutput.appendChild(newDiv);
+                            const newDiv = document.createElement("div");
+                            newDiv.classList.add("Result-output-items");
+                            newDiv.innerHTML = `
+                            <img src='http://covers.openlibrary.org/b/id/${data.works[i].cover_id}-M.jpg'>
+                            <button data-title="${encodeURIComponent(data.works[i].title)}" data-author="${encodeURIComponent(data.works[i].authors[0].name)}">Add to list</button>
+                            <br><a href="${workslink}"><h3>${data.works[i].title}</h3></a>
+                            <p>Author: ${data.works[i].authors[0].name}</p>
+                            <p>First published in ${data.works[i].first_publish_year}</p>
+                            `;
+                            resultsOutput.appendChild(newDiv);
                         }
                     }
                 }else{
@@ -366,7 +350,8 @@ function addBookInput(title, author){
             categorySelect.selectedIndex = 0;
             scoreSelect.selectedIndex = 0;
 
-            
+            // const allCategories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
+            // clearAllBooksLists(allCategories);
 
             // remove the event listener handling submission
             document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
@@ -466,6 +451,8 @@ function listDisplay(category){
         titleCell.textContent = book.title;
         authorCell.textContent = book.author;
         scoreCell.textContent = book.score;
+
+        index += 1;
     });
 }
 

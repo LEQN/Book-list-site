@@ -48,7 +48,47 @@
             <!-- display search results -->
             <div class="search-results">
                 <h4 id="result-count"></h4>
-                <div id="results-output"></div>
+                <div id="results-output" onclick="handleButtonClick(event)"></div>
+            </div>
+
+            <!-- modal for adding to list -->
+            <div class="modal-container">
+                <section class="modal hidden">
+                    <div class="flex">
+                        <h3>Add a book to My List</h3>
+                        <button class="close-btn">⨉</button>
+                    </div>
+                    <form id="modalInput">
+                        <div class="category-list">
+                            <label>Choose a List:</label>
+                            <select name="categorylist" id="lists">
+                                <option value="" disabled selected>-------------------</option>
+                                <option value="CurrentlyReading">Currently Reading</option>
+                                <option value="Completed">Completed</option>
+                                <option value="PlanToRead">Plan To Read</option>
+                            </select>
+                        </div>
+                        <!-- score select -->
+                        <div class="score-list">
+                            <label>Give a Score:</label>
+                            <select name="Scorelist" id="scores">
+                                <option value="" disabled selected>-----</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </section>
+                <div class="overlay hidden"></div>
             </div>
         </div>
         <footer>
