@@ -587,6 +587,17 @@ footer{
     padding: 3px;
     padding-right: 0;
 }
+
+.centeredCell{
+    text-align: center;
+}
+#itemlinks{
+    text-align: center;
+    display: inline-block;
+    font-size: small;
+}
+
+
 /* modal */
 .modal-container {
     display: flex;

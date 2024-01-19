@@ -350,9 +350,6 @@ function addBookInput(title, author){
             categorySelect.selectedIndex = 0;
             scoreSelect.selectedIndex = 0;
 
-            // const allCategories = ['CurrentlyReading', 'Completed', 'PlanToRead'];
-            // clearAllBooksLists(allCategories);
-
             // remove the event listener handling submission
             document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
         }
@@ -413,7 +410,6 @@ function AddBooksToLists(title, author, score, category){
 function listCategoryButtons(){
     const listButtons = document.getElementsByClassName('menu-options');
     if(listButtons.length > 0){
-        console.log("true");
         document.getElementById('Completed').addEventListener('click', function(){
             listDisplay("Completed");
         });
@@ -445,12 +441,20 @@ function listDisplay(category){
         const titleCell = row.insertCell(1);
         const authorCell = row.insertCell(2);
         const scoreCell = row.insertCell(3);
+        const editCell = row.insertCell(4);
+
+        // center content in specific cells
+        bookIndexCell.classList.add("centeredCell");
+        scoreCell.classList.add("centeredCell");
+        editCell.classList.add("centeredCell");
 
         // set values
         bookIndexCell.textContent = index;
         titleCell.textContent = book.title;
         authorCell.textContent = book.author;
         scoreCell.textContent = book.score;
+        editCell.innerHTML = `<span id="itemlinks"><a href="#" onclick="refresh('${category}', '${book.title}', '${book.author}', 'edit')">edit</a> 
+        | <a href="#" onclick="refresh('${category}', '${book.title}', '${book.author}', 'remove')"">remove</a></span>`;
 
         index += 1;
     });
@@ -480,12 +484,22 @@ function handleButtonClick(event){
     }
 }
 
-function clearAllBooksLists(categories) {
-    categories.forEach(category => {
-        const categoryKey = `${category}Books`;
-        localStorage.removeItem(categoryKey);
-        console.log(`${category} Books List cleared.`);
-    });
+// remove selected book from list
+function removeBook(title, author) {
+    console.log(title, author);
+}
+
+//refresh table data after list edit, takes list category, book title and author and action params
+function refresh(category, title, author, action){
+    // call method depending on if we are removing book from lists or editing 
+    if(action == "remove"){
+        removeBook(title, author);
+    }else{
+        addBookInput(title, author);
+    }
+    // call display to update table
+    // console.log("refresh the page");
+    // listDisplay(category);
 }
 
 // check if book already in list
@@ -527,6 +541,7 @@ function changeCategory(title, author, newScore, newCategory){
                 newCategoryList[existingBookIndex].score = newScore;
             }else{
                 // Add the book to the new category list
+                removedBook.score = newScore;
                 newCategoryList.push(removedBook);
             }
 
