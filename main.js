@@ -488,15 +488,31 @@ function handleButtonClick(event){
 }
 
 // remove selected book from list
-function removeBook(title, author) {
+function removeBook(title, author, category) {
+    return new Promise((resolve, reject) => {
     console.log(title, author);
+    // find book
+    const categoryKey = `${category}Books`;
+    const list = JSON.parse(localStorage.getItem(categoryKey)) || [];
+    // Find the book in the category list
+    const bookIndex = list.findIndex(book => book.title === title && book.author === author);
+
+    if (bookIndex !== -1) {
+        // Remove the book from the current category list
+        list.splice(bookIndex, 1);
+        // Update Local Storage
+        localStorage.setItem(categoryKey, JSON.stringify(list));
+    }
+
+    resolve()
+    })
 }
 
 //refresh table data after list edit, takes list category, book title and author and action params
 async function refresh(category, title, author, action){
     // call method depending on if we are removing book from lists or editing 
     if(action == "remove"){
-        await removeBook(title, author);
+        await removeBook(title, author, category);
     }else{
         await addBookInput(title, author);
     }
