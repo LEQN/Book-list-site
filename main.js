@@ -325,6 +325,7 @@ function loadHomeSearch(){
 // open modal for input details and add books
 let handleFormSubmission; 
 function addBookInput(title, author){
+    return new Promise((resolve, reject) => {
     openModal();
     // function to handle form submission
     handleFormSubmission = function(e) {
@@ -352,11 +353,13 @@ function addBookInput(title, author){
 
             // remove the event listener handling submission
             document.getElementById('modalInput').removeEventListener('submit', handleFormSubmission);
+            resolve()
         }
     }
 
     // attach eventlistener for form submission
     document.getElementById('modalInput').addEventListener('submit', handleFormSubmission);
+    })
 }
 
 // open modal for input
@@ -490,16 +493,16 @@ function removeBook(title, author) {
 }
 
 //refresh table data after list edit, takes list category, book title and author and action params
-function refresh(category, title, author, action){
+async function refresh(category, title, author, action){
     // call method depending on if we are removing book from lists or editing 
     if(action == "remove"){
-        removeBook(title, author);
+        await removeBook(title, author);
     }else{
-        addBookInput(title, author);
+        await addBookInput(title, author);
     }
     // call display to update table
-    // console.log("refresh the page");
-    // listDisplay(category);
+    console.log("refresh the page");
+    listDisplay(category);
 }
 
 // check if book already in list
