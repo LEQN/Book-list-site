@@ -134,3 +134,20 @@
     width: 350px;
     padding-left: 10px;
 }
+
+/* Home page carousels */
+.widget-container{
+   margin: 0 auto;
+   margin-bottom: 1em;
+   width: 90%;
+   background-color: hsl(199, 76%, 74%, 5%);
+   padding: 5px;
+}
+
+.widget-header{
+   color: #e33638;
+   padding: .5rem;
+   padding-bottom: 0;
+   font-size: 12px;
+   border-bottom: 1px solid rgb(61, 61, 61);
+}
