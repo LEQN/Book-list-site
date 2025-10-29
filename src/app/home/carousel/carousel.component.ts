@@ -17,7 +17,7 @@ export class CarouselComponent {
     return Math.max(0, this.books.length- this.cardsPerView+1);
   }
 
-  get visibleBooks():any[]{
+  get visibleBooks():Books[]{
     const endIndex = this.currentIndex + this.cardsPerView;
     return this.books.slice(this.currentIndex, endIndex); 
   }
