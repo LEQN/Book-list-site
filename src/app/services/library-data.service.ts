@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError, map, Observable } from 'rxjs';
-import { Books, rawTrending } from '../books';
+import { Books, rawClassics, rawFiction, rawTrending } from '../books';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,45 @@ export class LibraryDataService {
         }) as Books);
       }),catchError(err => {
         console.error('API ERROR:', err);
-        return throwError(()=> new Error('Failed to fetch books'));
+        return throwError(()=> new Error('Failed to fetch trending books'));
+      })
+    );
+  }
+
+  getClassicBooks(): Observable<Books[]>{
+    return this.http.get<rawClassics>(`${this.apiRoot}subjects/classic_literature.json?limit=100`).pipe(
+      map(response => {
+        return response.works.filter(item => this.isValidBook(item) && 
+        (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))
+        .map((item:any) => ({
+          author: item.authors[0].name,
+          cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+          publishYear: item.first_publish_year,
+          key: item.key,
+          title: item.title
+        }) as Books);
+      }), catchError(err => {
+        console.error('API ERROR:', err);
+        return throwError(() => new Error('Failed to fetch classic books'));
+      })
+    );
+  }
+
+  getFictionBooks(): Observable<Books[]>{
+    return this.http.get<rawFiction>(`${this.apiRoot}subjects/fiction.json?limit=100`).pipe(
+      map(response => {
+        return response.works.filter(item => this.isValidBook(item) &&
+      (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))
+      .map((item:any) => ({
+          author:item.authors[0].name,
+          cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+          publishYear: item.first_publish_year,
+          key: item.key,
+          title: item.title
+        }) as Books);
+      }), catchError(err => {
+        console.error('API ERROR: ', err);
+        return throwError(() => new Error('Failed to fetch Fiction books'))
       })
     );
   }

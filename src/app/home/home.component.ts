@@ -11,14 +11,26 @@ import { LibraryDataService } from '../services/library-data.service';
 })
 export class HomeComponent {
   trendingBooks: Books[] = [];
+  classicBooks: Books[] = [];
+  fictionBooks: Books[] = [];
 
   constructor(private librarySvc:LibraryDataService){}
 
   ngOnInit(){
     this.getTrending();
+    this.getClassics();
+    this.getFiction();
   }
 
   getTrending(){
     this.librarySvc.getTrendingBooks().subscribe(books => this.trendingBooks = books);
+  }
+
+  getClassics(){
+    this.librarySvc.getClassicBooks().subscribe(books => this.classicBooks = books);
+  }
+
+  getFiction(){
+    this.librarySvc.getFictionBooks().subscribe(books => this.fictionBooks = books);
   }
 }

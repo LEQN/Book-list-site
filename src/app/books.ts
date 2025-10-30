@@ -21,3 +21,12 @@ export interface rawClassics{
     work_count:number;
     works:any[];
 }
+
+export interface rawFiction{
+    key:string;
+    name:string;
+    subject_type:string;
+    solr_query:string;
+    work_count:number;
+    works:any[];
+}
