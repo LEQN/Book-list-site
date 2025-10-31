@@ -10,3 +10,8 @@ body{
     background-color: #020d11;
     min-height: 100vh;
 }
+
+app-root{
+    display: block;
+    height: 100vh;
+}
