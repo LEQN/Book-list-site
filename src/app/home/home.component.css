@@ -135,6 +135,15 @@
     padding-left: 10px;
 }
 
+/* required input error in search bar */
+#home-search .error{
+   background-color: hsl(318, 50%, 40%);
+   color: white;
+   margin:0 auto;
+   padding: 0 15px;
+   width: fit-content;
+}
+
 /* Home page carousels */
 .widget-container{
    margin: 0 auto;

@@ -13,13 +13,23 @@
     <div id="search-container">
         <div class="search-section">
             Search for a book:
-            <form id="home-search">
+            <form id="home-search" #searchForm="ngForm" (ngSubmit)="onSubmit()">
                 <div class="searchBox">
-                    <input class="searchInput" type="text" placeholder="Search">
-                    <button class="searchButton">
+                    <input 
+                        class="searchInput" 
+                        type="text"
+                        placeholder="Search"
+                        name="searchInput"
+                        [(ngModel)]="searchQuery"
+                        required
+                        #searchInput="ngModel">
+                    <button class="searchButton" type="submit" [disabled]="searchForm.invalid">
                         <i class="material-symbols-outlined">
                             Search</i>
                     </button>
+                </div>
+                <div class="error" *ngIf="searchInput.errors?.['required'] && searchInput.touched">
+                    Input is required to search 
                 </div>
             </form>
         </div>
