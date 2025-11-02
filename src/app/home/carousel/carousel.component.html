@@ -7,7 +7,7 @@
                 <img [src]="book.cover" [alt]="book.title">
             </div>
 
-            <button>Add To List</button>
+            <button (click)="printBook(book)">Add To List</button>
             
             <div class="card-info">
                 <p [style.font-weight]="'bold'">{{book.title}}</p>

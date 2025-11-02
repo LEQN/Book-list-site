@@ -41,3 +41,7 @@ header{
     text-decoration: underline;
     color: rgb(61, 61, 61);
 }
+
+.active{
+    border-bottom: 2px solid #e33638;
+}

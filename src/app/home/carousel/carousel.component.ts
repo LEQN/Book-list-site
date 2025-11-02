@@ -37,4 +37,8 @@ export class CarouselComponent {
       this.currentIndex = 0;
     }
   }
+
+  printBook(book:Books){
+    console.log(book);
+  }
 }
