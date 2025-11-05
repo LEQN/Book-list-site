@@ -36,6 +36,86 @@
     border-radius: 5px;
     border: 1px dotted #8ccfef;
     color: white;
-    text-align: center;
     margin-bottom: 20px;
+}
+
+#results-count{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.results-cards{
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.carousel-card{
+    background-color: #020d11;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 5px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 260px;
+    height: 280px;
+}
+
+.card-img-container{
+    width: 175px;
+    height: 175px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9e2628;
+    text-align: center;
+}
+
+img{
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+    width: auto;
+    max-height: 100%;
+    height: auto;
+}
+
+button{
+    background-color: #e33638;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 120px;
+    height: 25px;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: #9e2628;
+}
+
+.card-info{
+    text-align: center;
+    color: #8ccfef;
+    width: 95%;
+}
+
+.card-info p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.no-books{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e33638;
 }

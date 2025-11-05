@@ -11,6 +11,23 @@
 </form>
 
 <div class="search-results-container">
-    <h1>Content header</h1>
-    <p>lorem ipsum</p>
+    <div id="results-count" *ngIf="currentlySearching">Results found: {{books.length}}</div>
+    <div class="results-cards" [hidden]="books.length === 0">
+        <div class="carousel-card" *ngFor="let book of books">
+            <div class="card-img-container">
+                <img [src]="book.cover" [alt]="book.title">
+            </div>
+
+            <button>Add To List</button>
+            
+            <div class="card-info">
+                <p [style.font-weight]="'bold'">{{book.title}}</p>
+                <p>{{book.author}}</p>
+                <p>{{book.publishYear}}</p>
+            </div>
+        </div>
+        <div class="no-books" *ngIf="books.length === 0">
+            <p>Try and search for something...</p>
+        </div>
+    </div>
 </div>
