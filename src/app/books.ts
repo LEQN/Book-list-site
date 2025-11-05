@@ -30,3 +30,14 @@ export interface rawFiction{
     work_count:number;
     works:any[];
 }
+
+export interface rawSearch{
+    numFound: number,
+    start: number,
+    numFoundExact: boolean,
+    num_found: number,
+    documentation_url: string,
+    q: string,
+    offset: any,
+    docs: any[]
+}

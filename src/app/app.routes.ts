@@ -8,5 +8,5 @@ export const routes: Routes = [
     {path: 'search', component:SearchComponent, title:'Search'},
     {path: 'list', component:ListComponent, title:'My List'},
     {path: '', redirectTo:'/home', pathMatch:'full'},
-    {path: '**', redirectTo:'/list'} //wildcard redirect any unrecognised url
+    {path: '**', redirectTo:'/home'} //wildcard redirect any unrecognised url
 ];

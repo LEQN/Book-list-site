@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError, map, Observable } from 'rxjs';
-import { Books, rawClassics, rawFiction, rawTrending } from '../books';
+import { Books, rawClassics, rawFiction, rawSearch, rawTrending } from '../books';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +67,26 @@ export class LibraryDataService {
       }), catchError(err => {
         console.error('API ERROR: ', err);
         return throwError(() => new Error('Failed to fetch Fiction books'))
+      })
+    );
+  }
+
+  // get books from search
+  getSearchBooks(query: string): Observable<Books[]>{
+    return this.http.get<rawSearch>(`${this.apiRoot}search.json?q=${query}`).pipe(
+      map(response => {
+        return response.docs.filter(item => this.isValidBook(item) &&
+        (item.hasOwnProperty('author_name') && item.author_name.length > 0 && typeof item.author_name[0] === 'string'))
+        .map((item:any) => ({
+          author: item.author_name[0],
+          cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+          publishYear: item.first_publish_year,
+          key: item.key,
+          title: item.title
+        }) as Books);
+      }), catchError(err => {
+        console.error('API ERROR: ', err);
+        return throwError(() => new Error('Failed to fetch search results.'))
       })
     );
   }

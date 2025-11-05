@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselComponent } from "./carousel/carousel.component";
 import { Books } from '../books';
 import { LibraryDataService } from '../services/library-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bib-home',
@@ -18,7 +19,7 @@ export class HomeComponent {
 
   searchQuery: string = "";
 
-  constructor(private librarySvc:LibraryDataService){}
+  constructor(private librarySvc:LibraryDataService, private router:Router){}
 
   ngOnInit(){
     this.getTrending();
@@ -39,6 +40,6 @@ export class HomeComponent {
   }
 
   onSubmit(){
-    console.log(`Search submitted... ${this.searchQuery}`);
+    this.router.navigate(['search'], {queryParams:{query:this.searchQuery.toLowerCase()}});
   }
 }
