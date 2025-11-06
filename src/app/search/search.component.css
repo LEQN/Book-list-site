@@ -39,6 +39,19 @@
     margin-bottom: 20px;
 }
 
+.error{
+    background-color: #9e2628;
+   color: white;
+   margin:0 auto;
+   margin-top: -20px;
+   margin-bottom: 20px;
+   padding: 0 15px;
+   width: fit-content;
+   border-radius: 0 0 10px 10px;
+}
+
+/* search results display */
+
 #results-count{
     font-size: 1.2rem;
     font-weight: 600;

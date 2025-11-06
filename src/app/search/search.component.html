@@ -1,12 +1,20 @@
-<form>
+<form #searchForm="ngForm" (ngSubmit)="submitSearchForm()">
     <div class="search-bar">
-        <select name="search-type" id="">
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-            <option value="genre">Genre</option>
+        <select name="search-type" [(ngModel)]="searchType">
+            <option *ngFor="let type of searchTypes"
+                name="searchTypeInput"
+                [value]="type">
+                {{type}}
+            </option>
         </select>
-        <input type="text" placeholder="Search">
-        <button>Search</button>
+        <input name="queryInput" type="text" placeholder="Search"
+            [(ngModel)]="query"
+            #searchInput="ngModel"
+            required>
+        <button type="submit" [disabled]="searchForm.invalid">Search</button>
+    </div>
+    <div class="error" *ngIf="searchInput.errors?.['required'] && searchInput.touched">
+        Input is required to search!
     </div>
 </form>
 
