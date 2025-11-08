@@ -38,6 +38,7 @@ export class SearchComponent{
   }
 
   submitSearchForm(){
+    this.query = this.query.toLowerCase();
     this.currentlySearching = true;
     switch(this.searchType){
       case "Title":
