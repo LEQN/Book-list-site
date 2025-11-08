@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError, map, Observable } from 'rxjs';
-import { Books, rawClassics, rawFiction, rawSearch, rawTrending } from '../books';
+import { Books, rawClassics, rawFiction, rawSearch, rawSearchAuthor, rawTrending } from '../books';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryDataService {
 
-  apiRoot:String = "http://openlibrary.org/";
+  apiRoot:String = "https://openlibrary.org/";
 
   constructor(
     private http:HttpClient
@@ -71,7 +71,7 @@ export class LibraryDataService {
     );
   }
 
-  // get books from search
+  // get books from query search
   getSearchBooks(query: string): Observable<Books[]>{
     return this.http.get<rawSearch>(`${this.apiRoot}search.json?q=${query}`).pipe(
       map(response => {
@@ -86,7 +86,66 @@ export class LibraryDataService {
         }) as Books);
       }), catchError(err => {
         console.error('API ERROR: ', err);
-        return throwError(() => new Error('Failed to fetch search results.'))
+        return throwError(() => new Error('Failed to fetch search results.'));
+      })
+    );
+  }
+
+  // get results from title search
+  getTitleSearch(title: string):Observable<Books[]>{
+    return this.http.get<rawSearch>(`${this.apiRoot}search.json?title=${title}`).pipe(
+      map(response => {
+        return response.docs.filter((item:any) => this.isValidBook(item) &&
+          (item.hasOwnProperty('author_name') && item.author_name.length > 0 && typeof item.author_name[0] === 'string'))
+          .map((item:any) => ({
+            author:item.author_name[0],
+            cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+            publishYear: item.first_publish_year,
+            key: item.key,
+            title: item.title
+          }) as Books);
+      }), catchError(err => {
+        console.log('API ERROR: ', err);
+        return throwError(() => new Error(`Failed to fetch ${title} results`));
+      })
+    );
+  }
+
+  // get results from author search
+  getAuthorSearch(author:string):Observable<Books[]>{
+    return this.http.get<rawSearchAuthor>(`${this.apiRoot}search.json?author=${author}`).pipe(
+      map(response => {
+        return response.docs.filter((item:any) => this.isValidBook(item) && 
+            (item.hasOwnProperty('author_name') && item.author_name.length > 0 && typeof item.author_name[0] === 'string'))
+            .map((item:any) => ({
+              author:item.author_name[0],
+              cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+              publishYear: item.first_publish_year,
+              key: item.key,
+              title: item.title
+              }) as Books);
+      }), catchError(err => {
+        console.log('API ERROR: ', err);
+        return throwError(() => new Error(`Failed to fetch for author ${author}`));
+      })
+    );
+  }
+  // get results from subject/genre search
+  getGenreSearch(genre:string):Observable<Books[]>{
+    return this.http.get<rawClassics>(`${this.apiRoot}subjects/${genre}.json?limit=100`).pipe(
+      map(response => {
+        return response.works.filter((item:any) => this.isValidBook(item) && 
+        (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))
+        .map((item:any) => ({
+          author: item.authors[0].name,
+          cover: `http://covers.openlibrary.org/b/olid/${item.cover_edition_key}-M.jpg`,
+          publishYear: item.first_publish_year,
+          key: item.key,
+          title: item.title
+        }) as Books);
+      }), catchError(err => {
+        console.log('API ERROR: ', err);
+        return throwError(()=> new Error(`Failed api fetch searching for genre ${genre}`));
       })
     );
   }

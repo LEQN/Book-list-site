@@ -38,7 +38,18 @@ export class SearchComponent{
   }
 
   submitSearchForm(){
-    console.log(`Search form submitted: ${this.query} of type ${this.searchType}`)
+    this.currentlySearching = true;
+    switch(this.searchType){
+      case "Title":
+        this.librarySvc.getTitleSearch(this.query).subscribe((books) => this.books = books);
+        break;
+      case "Author":
+        this.librarySvc.getAuthorSearch(this.query).subscribe((books) => this.books = books);
+        break;
+      case "Genre":
+        this.librarySvc.getGenreSearch(this.query).subscribe((books)=> this.books = books);
+        break;
+    }
   }
 
 }

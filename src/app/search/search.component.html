@@ -2,7 +2,6 @@
     <div class="search-bar">
         <select name="search-type" [(ngModel)]="searchType">
             <option *ngFor="let type of searchTypes"
-                name="searchTypeInput"
                 [value]="type">
                 {{type}}
             </option>

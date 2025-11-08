@@ -41,3 +41,13 @@ export interface rawSearch{
     offset: any,
     docs: any[]
 }
+
+export interface rawSearchAuthor{
+    numFound: number,
+    start: number,
+    numFoundExact: boolean,
+    num_found: number,
+    documentation_url: string,
+    q: string,
+    docs: any[]
+}
