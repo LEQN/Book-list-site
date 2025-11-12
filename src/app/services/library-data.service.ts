@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError, map, Observable } from 'rxjs';
-import { Books, rawClassics, rawFiction, rawSearch, rawSearchAuthor, rawTrending } from '../books';
+import { Books, genre, rawSearch, rawSearchAuthor, rawTrending } from '../books';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class LibraryDataService {
   }
 
   getClassicBooks(): Observable<Books[]>{
-    return this.http.get<rawClassics>(`${this.apiRoot}subjects/classic_literature.json?limit=100`).pipe(
+    return this.http.get<genre>(`${this.apiRoot}subjects/classic_literature.json?limit=100`).pipe(
       map(response => {
         return response.works.filter(item => this.isValidBook(item) && 
         (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))
@@ -53,7 +53,7 @@ export class LibraryDataService {
   }
 
   getFictionBooks(): Observable<Books[]>{
-    return this.http.get<rawFiction>(`${this.apiRoot}subjects/fiction.json?limit=100`).pipe(
+    return this.http.get<genre>(`${this.apiRoot}subjects/fiction.json?limit=100`).pipe(
       map(response => {
         return response.works.filter(item => this.isValidBook(item) &&
       (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))
@@ -132,7 +132,7 @@ export class LibraryDataService {
   }
   // get results from subject/genre search
   getGenreSearch(genre:string):Observable<Books[]>{
-    return this.http.get<rawClassics>(`${this.apiRoot}subjects/${genre}.json?limit=100`).pipe(
+    return this.http.get<genre>(`${this.apiRoot}subjects/${genre}.json?limit=100`).pipe(
       map(response => {
         return response.works.filter((item:any) => this.isValidBook(item) && 
         (item.hasOwnProperty('authors') && item.authors.length > 0 && typeof item.authors[0].name === 'string'))

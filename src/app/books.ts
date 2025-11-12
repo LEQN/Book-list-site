@@ -13,23 +13,14 @@ export interface rawTrending{
     hours: number;
 }
 
-export interface rawClassics{
-    key:string;
-    name:string;
-    subject_type:string;
-    solr_query:string;
-    work_count:number;
-    works:any[];
-}
-
-export interface rawFiction{
-    key:string;
-    name:string;
-    subject_type:string;
-    solr_query:string;
-    work_count:number;
-    works:any[];
-}
+export interface genre{
+        key:string;
+        name:string;
+        subject_type:string;
+        solr_query:string;
+        work_count:number;
+        works:any[];
+    }
 
 export interface rawSearch{
     numFound: number,
