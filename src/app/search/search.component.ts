@@ -48,7 +48,8 @@ export class SearchComponent{
         this.librarySvc.getAuthorSearch(this.query).subscribe((books) => this.books = books);
         break;
       case "Genre":
-        this.librarySvc.getGenreSearch(this.query).subscribe((books)=> this.books = books);
+        var genreQuery: string = this.query.replace(" ", "_");
+        this.librarySvc.getGenreSearch(genreQuery).subscribe((books)=> this.books = books);
         break;
     }
   }
