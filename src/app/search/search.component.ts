@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LibraryDataService } from '../services/library-data.service';
 import { Books } from '../books';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'bib-search',
@@ -20,7 +21,8 @@ export class SearchComponent{
 
   constructor( 
     private router:ActivatedRoute,
-    private librarySvc: LibraryDataService
+    private librarySvc: LibraryDataService,
+    private modalSvc: ModalService
   ){}
 
   ngOnInit(){
@@ -52,6 +54,13 @@ export class SearchComponent{
         this.librarySvc.getGenreSearch(genreQuery).subscribe((books)=> this.books = books);
         break;
     }
+  }
+
+  openModal(): void{
+    document.body.style.overflow = 'hidden';
+    this.modalSvc.open().subscribe((action) => {
+      console.log("Actioned", action);
+    });
   }
 
 }
