@@ -1,0 +1,91 @@
+.modal{
+    background-color: #0a1a23;
+    color: #e33638;
+    z-index: 3;
+    position: fixed;
+    width: 50%;
+    height: 60vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px  #8ccfef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.modal-header{
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+
+.modal-header button{
+    color: white;
+    font-size: 1.4rem;
+    padding: 2px 8px;
+    background-color: black;
+    border: 2px solid #e33638;
+    border-radius: 20px;
+}
+
+.modal-header button:hover{
+    color: #8ccfef;
+    border-color: #8ccfef;
+}
+
+/* modal content form */
+.modal-content{
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.modal-content #content-header{
+    background-color: #020d11;
+    text-align: center;
+    margin: 5px 10px;
+    padding: 15px 0px;
+}
+
+/* modal footer */
+.modal-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-footer button{
+    font-size: 1rem;
+    padding: 5px 20px;
+    background-color: #003E5F;
+    color: white;
+    border-radius: 10px;
+    border: 2px solid #8ccfef;
+}
+
+.modal-footer button:hover{
+    background-color: #012f47;
+    border-color: #e33638;
+}
+
+/* overlay */
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

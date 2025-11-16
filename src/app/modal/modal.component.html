@@ -1,0 +1,15 @@
+<div class="modal">
+    <div class="modal-header">
+        <h3>Add Book to My List</h3>
+        <button (click)="close()">x</button>
+    </div>
+    <div class="modal-content">
+        <div id="content-header">Select your reading status, and if you wish, add a score.</div>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="submit" (click)="submit()" >Submit</button> 
+    </div>
+</div>
+
+<div class="overlay" (click)="close()"></div>

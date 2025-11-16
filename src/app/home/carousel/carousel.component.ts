@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Books } from '../../books';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'bib-carousel',
@@ -12,6 +13,8 @@ export class CarouselComponent {
   @Input() books:Books[] = [];
   currentIndex: number = 0;
   cardsPerView: number = 4;
+
+  constructor(private modalSvc: ModalService){}
 
   get totalCards(): number{
     return Math.max(0, this.books.length- this.cardsPerView+1);
@@ -38,7 +41,10 @@ export class CarouselComponent {
     }
   }
 
-  printBook(book:Books){
-    console.log(book);
+  openModal(): void{
+    document.body.style.overflow = 'hidden';
+    this.modalSvc.open().subscribe((action) => {
+      console.log("Actioned", action);
+    });
   }
 }
