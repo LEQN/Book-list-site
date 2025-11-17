@@ -5,10 +5,31 @@
     </div>
     <div class="modal-content">
         <div id="content-header">Select your reading status, and if you wish, add a score.</div>
-        
+        <!-- modal form here -->
+        <form id="modal-form" (ngSubmit)="submit()">
+            <div class="form-grid">
+                <label class="grid-label">Status</label>
+                <div class="grid-input">
+                    <select>
+                        <option disabled selected>Select an Option</option>
+                        <option ></option>
+                    </select>
+                </div>
+                <label class="grid-label">Your Score</label>
+                <div class="grid-input">
+                    <select>
+                        <option ></option>
+                    </select>
+                </div>
+                <label >Finish Date</label>
+                <div class="grid-input">
+                    <input type="date">
+                </div>
+            </div>
+         </form>
     </div>
     <div class="modal-footer">
-        <button type="submit" (click)="submit()" >Submit</button> 
+        <button form="modal-form" type="submit" (click)="submit()" >Submit</button> 
     </div>
 </div>
 
