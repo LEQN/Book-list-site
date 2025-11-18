@@ -6,30 +6,33 @@
     <div class="modal-content">
         <div id="content-header">Select your reading status, and if you wish, add a score.</div>
         <!-- modal form here -->
-        <form id="modal-form" (ngSubmit)="submit()">
+        <form [formGroup]="inputForm" id="modal-form" (ngSubmit)="submit()">
             <div class="form-grid">
                 <label class="grid-label">Status</label>
                 <div class="grid-input">
-                    <select>
-                        <option disabled selected>Select an Option</option>
-                        <option ></option>
+                    <select formControlName="status">
+                        <option [ngValue]="''" [hidden]="inputForm.get('status')?.value !== ''">Select an Option</option>
+                        <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
                     </select>
                 </div>
                 <label class="grid-label">Your Score</label>
                 <div class="grid-input">
-                    <select>
-                        <option ></option>
+                    <select formControlName="score">
+                        <option *ngFor="let score of scoreOptions" [ngValue]="score">{{score}}</option>
                     </select>
                 </div>
                 <label >Finish Date</label>
                 <div class="grid-input">
-                    <input type="date">
+                    <input type="date" formControlName="finishDate" [max]="today">
+                </div>
+                <div class="error" *ngIf="inputForm.get('finishDate')?.errors?.['futureDate']">
+                    Date cannot be in the future.
                 </div>
             </div>
          </form>
     </div>
     <div class="modal-footer">
-        <button form="modal-form" type="submit" (click)="submit()" >Submit</button> 
+        <button form="modal-form" type="submit" [disabled]="inputForm.invalid">Submit</button> 
     </div>
 </div>
 

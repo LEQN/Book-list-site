@@ -18,10 +18,15 @@ export class ModalService {
     const ModalComponentFactory = this.resolver.resolveComponentFactory(ModalComponent);
     const modalComponent = ModalComponentFactory.create(this.injector);
 
+    const sub = modalComponent.instance.inputForm.valueChanges.subscribe(() => {
+      modalComponent.hostView.detectChanges();
+    });
     modalComponent.instance.closeEvent.subscribe(() => {
+      sub.unsubscribe();
       this.closeModal();
     });
     modalComponent.instance.submitEvent.subscribe(() => {
+      sub.unsubscribe();
       this.submitModal();
     });
     modalComponent.hostView.detectChanges();
