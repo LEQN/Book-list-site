@@ -1,6 +1,14 @@
-import { Component, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
+import { Books } from '../books';
+
+export interface ModalSubmissionData {
+  book: Books;
+  status: string;
+  score?: number;
+  finishDate?: Date;
+}
 
 @Component({
   selector: 'bib-modal',
@@ -12,9 +20,10 @@ export class ModalComponent {
   statusOptions:string[] = ["Reading", "Completed", "Dropped", "Plan to Read"];
   scoreOptions: number[] = [1,2,3,4,5,6,7,8,9,10];
   inputForm!: FormGroup;
-  
+
+  @Input() currentBook!: Books;
   @Output() closeEvent = new EventEmitter();
-  @Output() submitEvent = new EventEmitter();
+  @Output() submitEvent = new EventEmitter<ModalSubmissionData>();
 
   constructor(
     private elementRef: ElementRef,
@@ -34,9 +43,15 @@ export class ModalComponent {
 
   submit(): void{
     if(this.inputForm.valid){
-      console.log('submitted', this.inputForm.value);
+      const submissionData: ModalSubmissionData = {
+        book: this.currentBook,
+        status: this.inputForm.get('status')?.value,
+        score: this.inputForm.get('score')?.value,
+        finishDate: this.inputForm.get('finishDate')?.value
+      }
+      // console.log("payload: ", submissionData);
       this.elementRef.nativeElement.remove();
-      this.submitEvent.emit();
+      this.submitEvent.emit(submissionData);
     }
   }
 

@@ -56,9 +56,9 @@ export class SearchComponent{
     }
   }
 
-  openModal(): void{
+  openModal(book:Books): void{
     document.body.style.overflow = 'hidden';
-    this.modalSvc.open().subscribe((action) => {
+    this.modalSvc.open(book).subscribe((action) => {
       console.log("Actioned", action);
     });
   }

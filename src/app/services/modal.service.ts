@@ -1,22 +1,26 @@
 import { DOCUMENT } from '@angular/common';
 import { ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent, ModalSubmissionData } from '../modal/modal.component';
 import { Subject } from 'rxjs';
+import { Books } from '../books';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
   private modalNotifier?: Subject<string>;
+
   constructor(
      private resolver: ComponentFactoryResolver,
      private injector: Injector,
      @Inject(DOCUMENT) private document:Document
   ) { }
 
-  open(){
+  open(book:Books){
     const ModalComponentFactory = this.resolver.resolveComponentFactory(ModalComponent);
     const modalComponent = ModalComponentFactory.create(this.injector);
+
+    modalComponent.instance.currentBook = book;
 
     const sub = modalComponent.instance.inputForm.valueChanges.subscribe(() => {
       modalComponent.hostView.detectChanges();
@@ -25,9 +29,9 @@ export class ModalService {
       sub.unsubscribe();
       this.closeModal();
     });
-    modalComponent.instance.submitEvent.subscribe(() => {
+    modalComponent.instance.submitEvent.subscribe((data: ModalSubmissionData) => {
       sub.unsubscribe();
-      this.submitModal();
+      this.submitModal(data);
     });
     modalComponent.hostView.detectChanges();
 
@@ -41,7 +45,8 @@ export class ModalService {
     this.modalNotifier?.complete();
   }
 
-  submitModal(){
+  submitModal(submissionData:ModalSubmissionData){
+    console.log(submissionData);
     this.modalNotifier?.next("Confirm");
     this.closeModal();
   }
