@@ -3,6 +3,7 @@ import { ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular
 import { ModalComponent, ModalSubmissionData } from '../modal/modal.component';
 import { Subject } from 'rxjs';
 import { Books } from '../books';
+import { UserListService } from './user-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class ModalService {
   constructor(
      private resolver: ComponentFactoryResolver,
      private injector: Injector,
+     private userListSVC:UserListService,
      @Inject(DOCUMENT) private document:Document
   ) { }
 
@@ -46,7 +48,7 @@ export class ModalService {
   }
 
   submitModal(submissionData:ModalSubmissionData){
-    console.log(submissionData);
+    this.userListSVC.addBook(submissionData);
     this.modalNotifier?.next("Confirm");
     this.closeModal();
   }

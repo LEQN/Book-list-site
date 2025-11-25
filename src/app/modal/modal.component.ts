@@ -49,7 +49,6 @@ export class ModalComponent {
         score: this.inputForm.get('score')?.value,
         finishDate: this.inputForm.get('finishDate')?.value
       }
-      // console.log("payload: ", submissionData);
       this.elementRef.nativeElement.remove();
       this.submitEvent.emit(submissionData);
     }
