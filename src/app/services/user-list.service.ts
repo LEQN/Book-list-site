@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ListItem, ReadingLists } from '../userLists'
 import { ModalSubmissionData } from '../modal/modal.component';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Injectable({
@@ -21,8 +22,20 @@ export class UserListService {
     "Plan to Read": "PlanToRead"
   };
 
-  constructor() {  }
+  constructor(@Inject(PLATFORM_ID) platformId:Object) { 
+      if(isPlatformBrowser(platformId)){
+        console.log("now loading local storage ");
+        this.loadLists();
+      }
+   }
 
+  loadLists():void{
+    const savedList = localStorage.getItem('ReadingLists');
+    if(savedList){
+      this.list = JSON.parse(savedList);
+      console.log(savedList);
+    }
+  }
 
   saveLists():void{
     localStorage.setItem('ReadingLists', JSON.stringify(this.list));
