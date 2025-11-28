@@ -1,14 +1,14 @@
 <h1>Books list</h1>
 <div class="status-menu">
     <ul>
-       <li><img src="icons/book_ribbon_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="book Icon">
+       <li (click)="gettingList('reading')"><img src="icons/book_ribbon_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="book Icon">
            Currently reading</li>
-       <li><img src="icons/check_box_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="checkbox icon">
+       <li (click)="gettingList('completed')"><img src="icons/check_box_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="checkbox icon">
            Completed</li>
-       <li>
+       <li (click)="gettingList('dropped')">
            <img src="icons/block_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="block icon">
            Dropped</li>
-       <li>
+       <li (click)="gettingList('plan')">
            <img src="icons/schedule_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="clock icon">
            Plan to read</li>
     </ul>

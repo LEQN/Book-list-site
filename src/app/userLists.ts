@@ -1,4 +1,3 @@
-import { Books } from "./books"
 
 export interface ReadingLists{
   Reading:ListItem[],
