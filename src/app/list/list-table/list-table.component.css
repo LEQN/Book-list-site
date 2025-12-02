@@ -1,0 +1,21 @@
+.table-Container{
+    background-color: aqua;
+    width: 100%;
+    height: 400px;
+}
+
+.Empty-List{
+    text-align: center;
+    padding: 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Empty-List #header{
+    font-size: 1.4rem;
+    font-weight: 600;
+}

@@ -1,0 +1,7 @@
+<div class="table-Container" [hidden]="list.length === 0">
+    <h3>Displaying table of values for the list selected</h3>
+</div>
+<div class="Empty-List" *ngIf="list.length === 0">
+    <p id="header">Your list is currently empty.</p>
+    <p>Go and look for some books to add!</p>
+</div>

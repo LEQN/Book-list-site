@@ -50,9 +50,9 @@ h1{
     border-top: none;
     border-radius: 0 0 10px 10px;
     margin: 0 auto;
+    margin-bottom: 40px;
     padding: 5px;
     width: 98%;
-    height: 200px;
 }
 
 .empty-list{

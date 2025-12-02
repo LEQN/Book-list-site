@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListItem } from '../userLists';
 import { UserListService } from '../services/user-list.service';
+import { ListTableComponent } from "./list-table/list-table.component";
 
 @Component({
   selector: 'bib-list',
-  imports: [CommonModule],
+  imports: [CommonModule, ListTableComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-  isListEmpty:boolean = true;
   list:ListItem[] = [];
 
   constructor(

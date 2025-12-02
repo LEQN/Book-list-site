@@ -14,9 +14,5 @@
     </ul>
 </div>
 <div class="list-container">
-    <div class="empty-list" *ngIf="isListEmpty">
-        <p>Your list is currently empty. <br>
-            Go add some books!</p>
-
-    </div>
+    <bib-list-table [list]="list"></bib-list-table>
 </div>
