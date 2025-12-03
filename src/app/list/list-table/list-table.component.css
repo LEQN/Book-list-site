@@ -1,9 +1,51 @@
 .table-Container{
-    background-color: aqua;
-    width: 100%;
+    width: 98%;
     height: 400px;
+    margin: 0 auto;
 }
 
+/* table of user list data */
+.table-Container table{
+    width: 100%;
+    border: 1px solid #8ccfef;
+}
+
+/* table header */
+thead{
+    color: #e12527;
+    text-decoration: underline white;
+}
+thead th{
+    border-bottom: 2px solid #8ccfef;
+    padding: 5px 0px;
+    font-size: 1rem;
+}
+
+thead th:not(:last-child){
+    border-right: 2px solid rgb(31, 29, 29);
+}
+
+/* table body */
+tbody{
+    color: white;
+    text-align: center;
+}
+
+tr td{
+    padding: 2px 0px;
+}
+
+/* vertical border separator */
+tr td:not(:last-child){
+    border-right: 2px solid rgb(31, 29, 29);
+}
+/* horizontal border */
+tbody tr:not(:last-child) td{
+    border-bottom: 1px solid #e12527;
+}
+
+
+/* empty list message */
 .Empty-List{
     text-align: center;
     padding: 40px;
