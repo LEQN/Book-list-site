@@ -1,6 +1,5 @@
 .table-Container{
     width: 98%;
-    height: 400px;
     margin: 0 auto;
 }
 
@@ -33,6 +32,26 @@ tbody{
 
 tr td{
     padding: 2px 0px;
+}
+
+td .cover-Container{
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9e2628;
+    text-align: center;
+}
+
+.cover-Container img{
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+    width: auto;
+    max-height: 100%;
+    height: auto;
 }
 
 /* vertical border separator */

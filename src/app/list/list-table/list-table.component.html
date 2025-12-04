@@ -8,7 +8,16 @@
             <th>Finish Date</th>
         </thead>
          <tbody>
-            
+            <tr *ngFor="let book of list">
+                <td><div class="cover-Container">
+                        <img [src]="book.cover" [alt]="book.title">
+                    </div>
+                </td>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.score || '-'}}</td>
+                <td>{{book.finishDate || '--/--/----'}}</td>
+            </tr>
          </tbody>
     </table>
 </div>
