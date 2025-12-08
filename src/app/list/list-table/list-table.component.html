@@ -1,14 +1,17 @@
 <div class="table-Container" [hidden]="list.length === 0">
     <table>
         <thead>
+            <th>#</th>
             <th>Cover</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Score</th>
-            <th>Finish Date</th>
+            <th id="header-score">Score</th>
+            <th id="header-finish-date">Finish Date</th>
+            <th id="header-edit">Edit</th>
         </thead>
          <tbody>
-            <tr *ngFor="let book of list">
+            <tr *ngFor="let book of list; let i = index">
+                <td>{{i+1}}</td>
                 <td><div class="cover-Container">
                         <img [src]="book.cover" [alt]="book.title">
                     </div>
@@ -17,6 +20,9 @@
                 <td>{{book.author}}</td>
                 <td>{{book.score || '-'}}</td>
                 <td>{{book.finishDate || '--/--/----'}}</td>
+                <td>
+                    <span [style.color]="'green'">edit</span>/
+                    <span [style.color]="'red'">delete</span></td>
             </tr>
          </tbody>
     </table>

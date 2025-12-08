@@ -33,7 +33,7 @@ export class UserListService {
     const savedList = localStorage.getItem('ReadingLists');
     if(savedList){
       this.list = JSON.parse(savedList);
-      console.log(savedList);
+      // console.log(savedList);
     }
   }
 

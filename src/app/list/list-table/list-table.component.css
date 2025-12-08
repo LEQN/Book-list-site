@@ -20,6 +20,16 @@ thead th{
     font-size: 1rem;
 }
 
+thead #header-score{
+    width: 60px;
+}
+thead #header-finish-date{
+    width: 120px;
+}
+thead #header-edit{
+    width: 80px;
+}
+
 thead th:not(:last-child){
     border-right: 2px solid rgb(31, 29, 29);
 }
@@ -52,6 +62,10 @@ td .cover-Container{
     width: auto;
     max-height: 100%;
     height: auto;
+}
+
+td span:hover{
+    text-decoration: underline;
 }
 
 /* vertical border separator */
