@@ -113,7 +113,7 @@ export class LibraryDataService {
 
   // get results from author search
   getAuthorSearch(author:string):Observable<Books[]>{
-    return this.http.get<rawSearchAuthor>(`${this.apiRoot}search.json?author=${author}`).pipe(
+    return this.http.get<rawSearchAuthor>(`${this.apiRoot}search/authors.json?q=${author}`).pipe(
       map(response => {
         return response.docs.filter((item:any) => this.isValidBook(item) && 
             (item.hasOwnProperty('author_name') && item.author_name.length > 0 && typeof item.author_name[0] === 'string'))

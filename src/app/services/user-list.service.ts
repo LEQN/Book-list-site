@@ -33,7 +33,6 @@ export class UserListService {
     const savedList = localStorage.getItem('ReadingLists');
     if(savedList){
       this.list = JSON.parse(savedList);
-      // console.log(savedList);
     }
   }
 
@@ -60,7 +59,12 @@ export class UserListService {
     }
   }
 
-  removeBook():void{}
+  removeBook(book:ListItem, listType:string):void{
+    // get key name for array of list being deleted from
+    var listTypeKey = this.STATUS_MAP[listType];
+    const bookIndex = this.list[listTypeKey].indexOf(book);
+    this.list[listTypeKey].splice(bookIndex, 1);
+  }
 
   get currentlyReadingList(){
     return this.list.Reading;

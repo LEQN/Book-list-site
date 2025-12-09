@@ -12,6 +12,7 @@ import { ListTableComponent } from "./list-table/list-table.component";
 })
 export class ListComponent {
   list:ListItem[] = [];
+  currentList:string = '';
 
   constructor(
     private userListSvc:UserListService
@@ -19,19 +20,23 @@ export class ListComponent {
 
   gettingList(ListType:string){
     switch (ListType){
-      case "reading":
+      case "Reading":
         this.list = this.userListSvc.currentlyReadingList;
         break;
-      case "completed":
+      case "Completed":
         this.list = this.userListSvc.completedList;
         break;
-      case "dropped":
+      case "Dropped":
         this.list = this.userListSvc.droppedList;
         break;
-        case "plan":
-          this.list = this.userListSvc.planToReadList;
-          break;
+      case "Plan to Read":
+        this.list = this.userListSvc.planToReadList;
+        break;
     }
-    console.log(this.list);
+    this.currentList = ListType;
+  }
+  
+  deleteBookItem(book:ListItem):void{
+    this.userListSvc.removeBook(book, this.currentList);
   }
 }

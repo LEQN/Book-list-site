@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListItem } from '../../userLists';
 
@@ -10,5 +10,9 @@ import { ListItem } from '../../userLists';
 })
 export class ListTableComponent {
   @Input() list!:ListItem[];
+  @Output() deleteItem = new EventEmitter<ListItem>();
 
+  deleteBookItem(book:ListItem):void{
+    this.deleteItem.emit(book);
+  }
 }

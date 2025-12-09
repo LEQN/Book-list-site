@@ -1,18 +1,18 @@
 <h1>Books list</h1>
 <div class="status-menu">
     <ul>
-       <li (click)="gettingList('reading')"><img src="icons/book_ribbon_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="book Icon">
+       <li (click)="gettingList('Reading')"><img src="icons/book_ribbon_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="book Icon">
            Currently reading</li>
-       <li (click)="gettingList('completed')"><img src="icons/check_box_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="checkbox icon">
+       <li (click)="gettingList('Completed')"><img src="icons/check_box_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="checkbox icon">
            Completed</li>
-       <li (click)="gettingList('dropped')">
+       <li (click)="gettingList('Dropped')">
            <img src="icons/block_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="block icon">
            Dropped</li>
-       <li (click)="gettingList('plan')">
+       <li (click)="gettingList('Plan to Read')">
            <img src="icons/schedule_22dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="clock icon">
            Plan to read</li>
     </ul>
 </div>
 <div class="list-container">
-    <bib-list-table [list]="list"></bib-list-table>
+    <bib-list-table [list]="list" (deleteItem)="deleteBookItem($event)"></bib-list-table>
 </div>

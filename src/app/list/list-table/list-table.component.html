@@ -22,7 +22,7 @@
                 <td>{{book.finishDate || '--/--/----'}}</td>
                 <td>
                     <span [style.color]="'green'">edit</span>/
-                    <span [style.color]="'red'">delete</span></td>
+                    <span [style.color]="'red'" (click)="deleteBookItem(book)">delete</span></td>
             </tr>
          </tbody>
     </table>
