@@ -14,5 +14,10 @@
     </ul>
 </div>
 <div class="list-container">
-    <bib-list-table [list]="list" (deleteItem)="deleteBookItem($event)"></bib-list-table>
+    <bib-list-table 
+        [list]="list" 
+        (deleteItem)="deleteBookItem($event)" 
+        (editItem)="editBookItem()"
+    >
+    </bib-list-table>
 </div>

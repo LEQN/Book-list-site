@@ -39,4 +39,8 @@ export class ListComponent {
   deleteBookItem(book:ListItem):void{
     this.userListSvc.removeBook(book, this.currentList);
   }
+
+  editBookItem():void{
+    console.log("Editing the book item...");
+  }
 }
