@@ -64,6 +64,7 @@ export class UserListService {
     var listTypeKey = this.STATUS_MAP[listType];
     const bookIndex = this.list[listTypeKey].indexOf(book);
     this.list[listTypeKey].splice(bookIndex, 1);
+    this.saveLists();
   }
 
   get currentlyReadingList(){
