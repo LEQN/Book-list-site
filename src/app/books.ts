@@ -1,7 +1,7 @@
 export interface Books {
     author: String;
     cover: String;
-    publishYear: number;
+    publishYear?: number;
     key: String;
     title: String;
 }

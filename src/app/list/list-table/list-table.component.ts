@@ -11,13 +11,13 @@ import { ListItem } from '../../userLists';
 export class ListTableComponent {
   @Input() list!:ListItem[];
   @Output() deleteItem = new EventEmitter<ListItem>();
-  @Output() editItem = new EventEmitter();
+  @Output() editItem = new EventEmitter<ListItem>();
 
   deleteBookItem(book:ListItem):void{
     this.deleteItem.emit(book);
   }
 
-  editBookItem():void{
-    this.editItem.emit();
+  editBookItem(book:ListItem):void{
+    this.editItem.emit(book);
   }
 }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ListItem } from '../userLists';
 import { UserListService } from '../services/user-list.service';
 import { ListTableComponent } from "./list-table/list-table.component";
+import { Books } from '../books';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'bib-list',
@@ -15,7 +17,8 @@ export class ListComponent {
   currentList:string = '';
 
   constructor(
-    private userListSvc:UserListService
+    private userListSvc:UserListService,
+    private modalSvc: ModalService
   ){}
 
   gettingList(ListType:string){
@@ -40,7 +43,13 @@ export class ListComponent {
     this.userListSvc.removeBook(book, this.currentList);
   }
 
-  editBookItem():void{
-    console.log("Editing the book item...");
+  editBookItem(book:ListItem):void{
+    const bookData: Books = {
+        author: book.author,
+        cover: book.cover,
+        key: book.key,
+        title: book.title
+    };
+    this.modalSvc.open(bookData);
   }
 }

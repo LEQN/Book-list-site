@@ -55,7 +55,7 @@ export class UserListService {
       this.list[listKey].push(listItem);
       this.saveLists();
     }else{
-      console.log("already exists. Move to list");
+      console.log("already exists. Move to list", submission);
     }
   }
 
