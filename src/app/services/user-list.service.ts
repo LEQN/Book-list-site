@@ -19,7 +19,8 @@ export class UserListService {
     "Reading": "Reading",
     "Completed": "Completed",
     "Dropped": "Dropped",
-    "Plan to Read": "PlanToRead"
+    "Plan to Read": "PlanToRead",
+    "PlanToRead": "PlanToRead"
   };
 
   constructor(@Inject(PLATFORM_ID) platformId:Object) { 
@@ -42,20 +43,20 @@ export class UserListService {
 
   addBook(submission:ModalSubmissionData):void{
     var alreadyExists = Object.values(this.list).some((arr:ListItem[]) => arr.some((b) => b.key === submission.book.key));
+    var listItem:ListItem = {
+      cover: submission.book.cover,
+      title: submission.book.title,
+      author: submission.book.author,
+      score: submission.score,
+      finishDate: submission.finishDate,
+      key: submission.book.key
+    };
     if(!alreadyExists){
-      var listItem:ListItem = {
-        cover: submission.book.cover,
-        title: submission.book.title,
-        author: submission.book.author,
-        score: submission.score,
-        finishDate: submission.finishDate,
-        key: submission.book.key
-      };
       var listKey = this.STATUS_MAP[submission.status];
       this.list[listKey].push(listItem);
       this.saveLists();
     }else{
-      console.log("already exists. Move to list");
+      this.editBook(listItem, submission.status);
     }
   }
 
@@ -64,6 +65,23 @@ export class UserListService {
     var listTypeKey = this.STATUS_MAP[listType];
     const bookIndex = this.list[listTypeKey].indexOf(book);
     this.list[listTypeKey].splice(bookIndex, 1);
+    this.saveLists();
+  }
+
+  // edit list item of a book, could be updating values or moving list
+  editBook(book:ListItem, moveToCategory:string):void{
+    // find which list book currently belongs too
+    const prevInstanceList = Object.keys(this.list).find(key => 
+      this.list[this.STATUS_MAP[key]]?.some(b => b.key === book.key));
+
+    if(!prevInstanceList){
+      console.log("Couldnt find array!", Object.keys(this.list));
+      return;
+    }
+    const prevInstanceIndex = this.list[this.STATUS_MAP[prevInstanceList]].findIndex(listItem => listItem.key === book.key);
+    this.list[this.STATUS_MAP[prevInstanceList]].splice(prevInstanceIndex, 1);
+
+    this.list[this.STATUS_MAP[moveToCategory]].push(book);
     this.saveLists();
   }
 

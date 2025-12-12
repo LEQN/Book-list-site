@@ -21,7 +21,7 @@
                 <td>{{book.score || '-'}}</td>
                 <td>{{book.finishDate || '--/--/----'}}</td>
                 <td>
-                    <span [style.color]="'green'">edit</span>/
+                    <span [style.color]="'green'" (click)="editBookItem(book)">edit</span>/
                     <span [style.color]="'red'" (click)="deleteBookItem(book)">delete</span></td>
             </tr>
          </tbody>
